@@ -16,17 +16,6 @@ function calculateDiscount(price: number, discount: number): number {
 }
 
 
-// Тип замовлення
-type Order = {
-    status: string; 
-};
-
-// Функція для відправки повідомлень
-function sendNotification(order: Order): void {
-    console.log(`Notification sent for order with status: ${order.status}`);
-}
-
-
 //поганий приклад
 function processOrder(order: Order): void {
     if (order.status === "new") {
@@ -71,7 +60,6 @@ class DataAnalyzer {
         return { total, average };
     }
 }
-
 // Використання:
 const analyzer = new DataAnalyzer([10, 20, 30]);
 console.log(analyzer.analyze());
