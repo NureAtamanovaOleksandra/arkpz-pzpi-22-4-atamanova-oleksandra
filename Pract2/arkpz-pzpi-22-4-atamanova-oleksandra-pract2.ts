@@ -6,7 +6,6 @@ function calculateDiscount(price: number, discount: number): number {
     return price - (price * (discount / 100));
 }
 
-
 //виправлений приклад
 function calculateDiscount(price: number, discount: number): number {
     let adjustedDiscount = discount; // створення локальної змінної
@@ -15,6 +14,7 @@ function calculateDiscount(price: number, discount: number): number {
     }
     return price - (price * (adjustedDiscount / 100));
 }
+
 
 // Тип замовлення
 type Order = {
@@ -26,7 +26,8 @@ function sendNotification(order: Order): void {
     console.log(`Notification sent for order with status: ${order.status}`);
 }
 
-/*//поганий приклад
+
+//поганий приклад
 function processOrder(order: Order): void {
     if (order.status === "new") {
         sendNotification(order);
@@ -35,7 +36,7 @@ function processOrder(order: Order): void {
         sendNotification(order);
         console.log("Order processed.");
     }
-}*/
+}
 
 //виправлений приклад
 function processOrder(order: Order): void {
