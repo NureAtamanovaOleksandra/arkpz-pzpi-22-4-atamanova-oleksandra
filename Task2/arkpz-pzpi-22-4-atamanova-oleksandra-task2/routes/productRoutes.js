@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
+const authenticateToken = require('../middlewares/authenticateToken');
 
 router.get('/', async (req, res) => {
     try {
@@ -10,6 +11,8 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
+router.use(authenticateToken);
 
 router.post('/', async (req, res) => {
     const { name, description, brand, size, type, price, quantity } = req.body;
