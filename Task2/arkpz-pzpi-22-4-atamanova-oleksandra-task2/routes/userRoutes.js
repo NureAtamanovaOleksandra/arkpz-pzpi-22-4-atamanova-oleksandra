@@ -24,7 +24,16 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+const validateUser = (req, res, next) => {
+    const { role, name, email, password } = req.body;
+    if (!role) return res.status(400).json({ message: 'Role is required' });
+    if (!name) return res.status(400).json({ message: 'Name is required' });
+    if (!email) return res.status(400).json({ message: 'Email is required' });
+    if (!password) return res.status(400).json({ message: 'Password is required' });
+    next();
+};
+
+router.post('/', validateUser, async (req, res) => {
     const { role, name, email, password } = req.body;
     const user = new User({ role, name, email, password });
 

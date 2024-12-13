@@ -74,7 +74,17 @@ router.get('/popular/:startDate/:endDate', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+const validateOrderItem = (req, res, next) => {
+    const { order_id, product_id, user_id, quantity, price_per_item } = req.body;
+    if (!order_id) return res.status(400).json({ message: 'Order ID is required' });
+    if (!product_id) return res.status(400).json({ message: 'Product ID is required' });
+    if (!user_id) return res.status(400).json({ message: 'User ID is required' });
+    if (!quantity) return res.status(400).json({ message: 'Quantity is required' });
+    if (!price_per_item) return res.status(400).json({ message: 'Price per item is required' });
+    next();
+};
+
+router.post('/', validateOrderItem, async (req, res) => {
     const { order_id, product_id, user_id, quantity, price_per_item } = req.body;
     const orderItem = new OrderItem({ order_id, product_id, user_id, quantity, price_per_item });
 

@@ -75,7 +75,19 @@ router.get('/quantity/:min/:max', async (req, res) => {
 
 router.use(authenticateToken);
 
-router.post('/', async (req, res) => {
+const validateProduct = (req, res, next) => {
+    const { name, description, brand, size, type, price, quantity } = req.body;
+    if (!name) return res.status(400).json({ message: 'Name is required' });
+    if (!description) return res.status(400).json({ message: 'Description is required' });
+    if (!brand) return res.status(400).json({ message: 'Brand is required' });
+    if (!size) return res.status(400).json({ message: 'Size is required' });
+    if (!type) return res.status(400).json({ message: 'Type is required' });
+    if (!price) return res.status(400).json({ message: 'Price is required' });
+    if (!quantity) return res.status(400).json({ message: 'Quantity is required' });
+    next();
+};
+
+router.post('/', validateProduct, async (req, res) => {
     const { name, description, brand, size, type, price, quantity } = req.body;
     const product = new Product({ name, description, brand, size, type, price, quantity });
 

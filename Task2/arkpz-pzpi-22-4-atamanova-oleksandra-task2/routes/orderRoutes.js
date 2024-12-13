@@ -64,7 +64,15 @@ router.get('/date/:startDate/:endDate', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+const validateOrder = (req, res, next) => {
+    const { user_id, total_price, status } = req.body;
+    if (!user_id) return res.status(400).json({ message: 'User ID is required' });
+    if (!total_price) return res.status(400).json({ message: 'Total price is required' });
+    if (!status) return res.status(400).json({ message: 'Status is required' });
+    next();
+};
+
+router.post('/', validateOrder, async (req, res) => {
     const { user_id, total_price, status } = req.body;
     const order = new Order({ user_id, total_price, status });
 

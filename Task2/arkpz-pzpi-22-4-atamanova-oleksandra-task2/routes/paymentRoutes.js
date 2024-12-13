@@ -38,7 +38,17 @@ router.get('/status/:status', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+const validatePayment = (req, res, next) => {
+    const { order_id, user_id, product_id, amount, status } = req.body;
+    if (!order_id) return res.status(400).json({ message: 'Order ID is required' });
+    if (!user_id) return res.status(400).json({ message: 'User ID is required' });
+    if (!product_id) return res.status(400).json({ message: 'Product ID is required' });
+    if (!amount) return res.status(400).json({ message: 'Amount is required' });
+    if (!status) return res.status(400).json({ message: 'Status is required' });
+    next();
+};
+
+router.post('/', validatePayment, async (req, res) => {
     const { order_id, user_id, product_id, amount, status } = req.body;
     const payment = new Payment({ order_id, user_id, product_id, amount, status });
 
