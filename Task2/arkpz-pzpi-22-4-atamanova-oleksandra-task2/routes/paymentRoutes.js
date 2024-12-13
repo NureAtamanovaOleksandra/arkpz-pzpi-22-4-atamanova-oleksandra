@@ -4,7 +4,7 @@ const Payment = require('../models/Payment');
 
 router.get('/', async (req, res) => {
     try {
-        const payments = await Payment.find().populate('order_id user_id');
+        const payments = await Payment.find().populate(['order_id', 'user_id', 'product_id']);
         res.json(payments);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -12,8 +12,8 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const { order_id, user_id, amount, status } = req.body;
-    const payment = new Payment({ order_id, user_id, amount, status });
+    const { order_id, user_id, product_id, amount, status } = req.body;
+    const payment = new Payment({ order_id, user_id, product_id, amount, status });
 
     try {
         const savedPayment = await payment.save();
