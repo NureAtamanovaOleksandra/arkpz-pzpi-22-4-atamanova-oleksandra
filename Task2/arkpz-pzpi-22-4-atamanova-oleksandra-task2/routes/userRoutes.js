@@ -5,6 +5,7 @@ const authenticateToken = require('../middlewares/authenticateToken');
 
 router.get('/', async (req, res) => {
     try {
+        console.log(req.user);
         const users = await User.find();
         res.json(users);
     } catch (error) {
@@ -26,10 +27,10 @@ router.post('/', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.user.id);
         if (!user) return res.status(404).json({ message: 'User not found' });
 
-        await User.deleteOne({ _id: req.params.id });
+        await User.deleteOne({ _id: req.user.id });
         res.json({ message: 'User deleted' });
     } catch (error) {
         res.status(500).json({ message: error.message });
