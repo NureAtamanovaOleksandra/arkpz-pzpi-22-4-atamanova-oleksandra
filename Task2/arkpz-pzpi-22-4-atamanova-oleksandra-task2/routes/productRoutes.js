@@ -12,6 +12,67 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/:id', async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+        res.json(product);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+router.get('/brand/:brand', async (req, res) => {
+    try {
+        const products = await Product.find({ brand: req.params.brand });
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+router.get('/size/:size', async (req, res) => {
+    try {
+        const products = await Product.find({ size: req.params.size });
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+router.get('/type/:type', async (req, res) => {
+    try {
+        const products = await Product.find({ type: req.params.type });
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+router.get('/price/:min/:max', async (req, res) => {
+    try {
+        const products = await Product.find({
+            price: { $gte: req.params.min, $lte: req.params.max }
+        });
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+router.get('/quantity/:min/:max', async (req, res) => {
+    try {
+        const products = await Product.find({
+            quantity: { $gte: req.params.min, $lte: req.params.max }
+        });
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 router.use(authenticateToken);
 
 router.post('/', async (req, res) => {

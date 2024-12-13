@@ -11,6 +11,33 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/order/:orderId', async (req, res) => {
+    try {
+        const payments = await Payment.find({ order_id: req.params.orderId }).populate(['order_id', 'user_id', 'product_id']);
+        res.json(payments);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+router.get('/user/:userId', async (req, res) => {
+    try {
+        const payments = await Payment.find({ user_id: req.params.userId }).populate(['order_id', 'user_id', 'product_id']);
+        res.json(payments);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+router.get('/status/:status', async (req, res) => {
+    try {
+        const payments = await Payment.find({ status: req.params.status }).populate(['order_id', 'user_id', 'product_id']);
+        res.json(payments);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 router.post('/', async (req, res) => {
     const { order_id, user_id, product_id, amount, status } = req.body;
     const payment = new Payment({ order_id, user_id, product_id, amount, status });
