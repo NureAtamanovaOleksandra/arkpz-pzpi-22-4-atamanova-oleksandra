@@ -24,27 +24,6 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-const validateUser = (req, res, next) => {
-    const { role, name, email, password } = req.body;
-    if (!role) return res.status(400).json({ message: 'Role is required' });
-    if (!name) return res.status(400).json({ message: 'Name is required' });
-    if (!email) return res.status(400).json({ message: 'Email is required' });
-    if (!password) return res.status(400).json({ message: 'Password is required' });
-    next();
-};
-
-router.post('/', validateUser, async (req, res) => {
-    const { role, name, email, password } = req.body;
-    const user = new User({ role, name, email, password });
-
-    try {
-        const savedUser = await user.save();
-        res.status(201).json(savedUser);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-});
-
 router.delete('/:id', async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
