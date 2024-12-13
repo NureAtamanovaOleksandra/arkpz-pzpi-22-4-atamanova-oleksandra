@@ -23,4 +23,16 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.delete('/:id', async (req, res) => {
+    try {
+        const payment = await Payment.findById(req.params.id);
+        if (!payment) return res.status(404).json({ message: 'Payment not found' });
+
+        await Payment.deleteOne({ _id: req.params.id });
+        res.json({ message: 'Payment deleted' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 module.exports = router;
