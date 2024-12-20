@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const authenticateToken = require('../middlewares/authenticateToken');
+const checkAdmin = require('../middlewares/checkAdmin');
 
 router.get('/', async (req, res) => {
     try {
@@ -31,6 +32,18 @@ router.delete('/:id', async (req, res) => {
 
         await User.deleteOne({ _id: req.user.id });
         res.json({ message: 'User deleted' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+router.delete('/admin/:id', authenticateToken, checkAdmin, async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) return res.status(404).json({ message: 'User not found' });
+
+        await User.deleteOne({ _id: req.params.id });
+        res.json({ message: 'User deleted by admin' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

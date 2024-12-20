@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const OrderItem = require('../models/OrderItem');
+const authenticateToken = require('../middlewares/authenticateToken');
+const checkAdmin = require('../middlewares/checkAdmin');
 
 router.get('/', async (req, res) => {
     try {
@@ -96,7 +98,7 @@ router.post('/', validateOrderItem, async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authenticateToken, checkAdmin, async (req, res) => {
     try {
         const orderItem = await OrderItem.findById(req.params.id);
         if (!orderItem) return res.status(404).json({ message: 'Order item not found' });

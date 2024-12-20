@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Order = require('../models/Order');
 const authenticateToken = require('../middlewares/authenticateToken');
+const checkAdmin = require('../middlewares/checkAdmin');
 
 
 router.get('/', async (req, res) => {
@@ -84,7 +85,7 @@ router.post('/', validateOrder, async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authenticateToken, checkAdmin, async (req, res) => {
     try {
         const order = await Order.findById(req.params.id);
         if (!order) return res.status(404).json({ message: 'Order not found' });
@@ -95,6 +96,5 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
-
 
 module.exports = router;
