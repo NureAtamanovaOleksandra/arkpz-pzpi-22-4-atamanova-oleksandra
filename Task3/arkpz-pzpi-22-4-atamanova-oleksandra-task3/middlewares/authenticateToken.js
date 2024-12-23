@@ -10,7 +10,7 @@ const authenticateToken = (req, res, next) => {
         req.user = verified;
         next();
     } catch (err) {
-        res.status(403).json({ error: 'Invalid token' });
+        res.status(401).json({ error: 'Session expired. Please log in again.' });
     }
 };
 

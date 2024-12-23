@@ -77,26 +77,29 @@ router.get('/quantity/:min/:max', async (req, res) => {
 router.use(authenticateToken);
 
 const validateProduct = (req, res, next) => {
-    const { name, description, brand, size, type, price, quantity } = req.body;
+    const { name, description, brand, size, type, price, quantity, releaseDate } = req.body;
+
     if (!name) return res.status(400).json({ message: 'Name is required' });
     if (!description) return res.status(400).json({ message: 'Description is required' });
     if (!brand) return res.status(400).json({ message: 'Brand is required' });
     if (!size) return res.status(400).json({ message: 'Size is required' });
     if (!type) return res.status(400).json({ message: 'Type is required' });
-    if (!price) return res.status(400).json({ message: 'Price is required' });
-    if (!quantity) return res.status(400).json({ message: 'Quantity is required' });
+    if (typeof price !== 'number' || price <= 0) return res.status(400).json({ message: 'Price must be a positive number' });
+    if (typeof quantity !== 'number' || quantity < 0) return res.status(400).json({ message: 'Quantity must be a non-negative number' });
+    if (!releaseDate || isNaN(Date.parse(releaseDate))) return res.status(400).json({ message: 'Valid release date is required' });
+
     next();
 };
 
-router.post('/', validateProduct, async (req, res) => {
+router.post('/', checkAdmin, validateProduct, async (req, res) => {
     const { name, description, brand, size, type, price, quantity } = req.body;
     const product = new Product({ name, description, brand, size, type, price, quantity });
 
     try {
-        const savedProduct = await product.save();
-        res.status(201).json(savedProduct);
+        await product.save();
+        res.status(201).json(product);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
 });
 
@@ -112,7 +115,7 @@ router.delete('/:id', authenticateToken, checkAdmin, async (req, res) => {
     }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', authenticateToken, checkAdmin, async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         if (!product) return res.status(404).json({ message: 'Product not found' });

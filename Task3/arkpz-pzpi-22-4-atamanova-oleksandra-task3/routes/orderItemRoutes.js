@@ -4,7 +4,19 @@ const OrderItem = require('../models/OrderItem');
 const authenticateToken = require('../middlewares/authenticateToken');
 const checkAdmin = require('../middlewares/checkAdmin');
 
-router.get('/', async (req, res) => {
+router.get('/my-order-items', authenticateToken, async (req, res) => {
+    try {
+        const orderItems = await OrderItem.find({ user_id: req.user.id }).populate(['order_id', 'product_id', 'user_id']);
+        if (!orderItems.length) {
+            return res.status(404).json({ message: 'You have no order items yet' });
+        }
+        res.json(orderItems);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+router.get('/', checkAdmin, async (req, res) => {
     try {
         const orderItems = await OrderItem.find().populate(['order_id', 'product_id', 'user_id']);
         res.json(orderItems);
@@ -81,8 +93,8 @@ const validateOrderItem = (req, res, next) => {
     if (!order_id) return res.status(400).json({ message: 'Order ID is required' });
     if (!product_id) return res.status(400).json({ message: 'Product ID is required' });
     if (!user_id) return res.status(400).json({ message: 'User ID is required' });
-    if (!quantity) return res.status(400).json({ message: 'Quantity is required' });
-    if (!price_per_item) return res.status(400).json({ message: 'Price per item is required' });
+    if (typeof quantity !== 'number' || quantity <= 0) return res.status(400).json({ message: 'Quantity must be a positive number' });
+    if (typeof price_per_item !== 'number' || price_per_item <= 0) return res.status(400).json({ message: 'Price per item must be a positive number' });
     next();
 };
 

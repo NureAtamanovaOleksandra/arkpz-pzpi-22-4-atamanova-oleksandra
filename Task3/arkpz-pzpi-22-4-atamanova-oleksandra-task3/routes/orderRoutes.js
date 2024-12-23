@@ -4,8 +4,19 @@ const Order = require('../models/Order');
 const authenticateToken = require('../middlewares/authenticateToken');
 const checkAdmin = require('../middlewares/checkAdmin');
 
+router.get('/my-orders', authenticateToken, async (req, res) => {
+    try {
+        const orders = await Order.find({ user_id: req.user.id }).populate('user_id');
+        if (!orders.length) {
+            return res.status(404).json({ message: 'You have no orders yet' });
+        }
+        res.json(orders);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 
-router.get('/', async (req, res) => {
+router.get('/', checkAdmin, async (req, res) => {
     try {
         const orders = await Order.find().populate('user_id');
         res.json(orders);
@@ -68,7 +79,7 @@ router.get('/date/:startDate/:endDate', async (req, res) => {
 const validateOrder = (req, res, next) => {
     const { user_id, total_price, status } = req.body;
     if (!user_id) return res.status(400).json({ message: 'User ID is required' });
-    if (!total_price) return res.status(400).json({ message: 'Total price is required' });
+    if (typeof total_price !== 'number' || total_price <= 0) return res.status(400).json({ message: 'Total price must be a positive number' });
     if (!status) return res.status(400).json({ message: 'Status is required' });
     next();
 };

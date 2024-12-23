@@ -7,7 +7,22 @@ const authenticateToken = require('../middlewares/authenticateToken');
 const checkAdmin = require('../middlewares/checkAdmin');
 const bcrypt = require('bcryptjs');
 
-router.get('/', async (req, res) => {
+const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+};
+
+const validatePassword = (password) => {
+    const re = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    return re.test(password);
+};
+
+const validateName = (name) => {
+    const re = /^[A-Za-zА-Яа-я]{2,}$/;
+    return re.test(name);
+};
+
+router.get('/', authenticateToken, checkAdmin, async (req, res) => {
     try {
         const users = await User.find();
         res.json(users);
@@ -16,7 +31,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', checkAdmin, async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) {
@@ -78,10 +93,34 @@ router.put('/:id', async (req, res) => {
         if (!user) return res.status(404).json({ message: 'User not found' });
 
         const { role, name, email, password } = req.body;
-        user.role = role || user.role;
-        user.name = name || user.name;
-        user.email = email || user.email;
-        user.password = password || user.password;
+
+        if (email) {
+            if (!validateEmail(email)) {
+                return res.status(400).json({ message: 'Invalid email format' });
+            }
+            user.email = email;
+        }
+
+        if (name) {
+            if (!validateName(name)) {
+                return res.status(400).json({ message: 'Invalid name format. Use only letters, minimum 2 characters' });
+            }
+            user.name = name;
+        }
+
+        if (password) {
+            if (!validatePassword(password)) {
+                return res.status(400).json({ 
+                    message: 'Password must be at least 8 characters long and contain both letters and numbers' 
+                });
+            }
+            const hashedPassword = await bcrypt.hash(password, 10);
+            user.password = hashedPassword;
+        }
+
+        if (role) {
+            user.role = role;
+        }
 
         const updatedUser = await user.save();
         res.json(updatedUser);
