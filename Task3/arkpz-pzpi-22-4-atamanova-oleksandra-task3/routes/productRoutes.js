@@ -86,7 +86,6 @@ const validateProduct = (req, res, next) => {
     if (!type) return res.status(400).json({ message: 'Type is required' });
     if (typeof price !== 'number' || price <= 0) return res.status(400).json({ message: 'Price must be a positive number' });
     if (typeof quantity !== 'number' || quantity < 0) return res.status(400).json({ message: 'Quantity must be a non-negative number' });
-    if (!releaseDate || isNaN(Date.parse(releaseDate))) return res.status(400).json({ message: 'Valid release date is required' });
 
     next();
 };
