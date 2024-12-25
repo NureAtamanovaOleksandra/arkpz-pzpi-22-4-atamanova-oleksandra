@@ -41,7 +41,8 @@ start cmd /k npm start
 echo.
 echo Starting ngrok tunnel...
 cd ..
-start ngrok http 5000
+start ngrok http --scheme=http 5000
+
 
 echo.
 echo ===================================
