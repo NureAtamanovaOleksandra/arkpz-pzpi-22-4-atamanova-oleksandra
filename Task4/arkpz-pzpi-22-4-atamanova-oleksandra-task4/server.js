@@ -7,7 +7,9 @@ const orderRoutes = require('./routes/orderRoutes');
 const orderItemRoutes = require('./routes/orderItemRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const authRoutes = require('./routes/authRoutes');
+const iotRoutes = require('./routes/iotRoutes');
 const authenticateToken = require('./middlewares/authenticateToken');
+const cors = require('cors'); 
 
 dotenv.config();
 
@@ -16,10 +18,12 @@ const PORT = process.env.PORT || 5000;
 
 connectDB();
 
+app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/iot', iotRoutes);
 
 app.use(authenticateToken);
 app.use('/api/users', userRoutes);
