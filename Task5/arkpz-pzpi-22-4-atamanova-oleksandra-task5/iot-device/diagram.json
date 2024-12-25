@@ -1,0 +1,31 @@
+{
+    "version": 1,
+    "author": "Олександра Атаманова",
+    "editor": "wokwi",
+    "parts": [
+      {
+        "type": "board-esp32-devkit-c-v4",
+        "id": "esp",
+        "top": 0,
+        "left": 0,
+        "attrs": {}
+      },
+      {
+        "type": "wokwi-rgb-led",
+        "id": "rgb1",
+        "top": 100,
+        "left": 100,
+        "attrs": {
+          "common": "anode"
+        }
+      }
+    ],
+    "connections": [
+      [ "esp:23", "rgb1:R", "red", [ "v0" ] ],
+      [ "esp:22", "rgb1:G", "green", [ "v0" ] ],
+      [ "esp:21", "rgb1:B", "blue", [ "v0" ] ],
+      [ "esp:3V3", "rgb1:COM", "black", [ "v0" ] ],
+      [ "esp:TX", "$serialMonitor:RX", "", [] ],
+      [ "esp:RX", "$serialMonitor:TX", "", [] ]
+    ]
+  }
