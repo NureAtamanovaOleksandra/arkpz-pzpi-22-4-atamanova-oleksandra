@@ -21,43 +21,42 @@
  
 
 
-
-
 Харків 2024
-МЕТА
+
+1 МЕТА
 
 Метою роботи є розробка бази даних для серверної частини та прикладного програмного інтерфейсу для програмної системи управління та автоматизації дистанційних замовлень у магазині світлодіодної продукції.
 
-ХІД РОБОТИ
+2 ХІД РОБОТИ
 
 Першим етапом виконання лабораторної роботи стало розроблення UML-діаграми прецедентів для програмної системи управління та автоматизації дистанційних замовлень у магазині світлодіодної продукції. Цю діаграму наведено в Додатку А.
 Далі було побудовано ER-діаграму, яку наведено в Додатку Б. 
 На основі створеної ER-діаграми було спроектовано та реалізовано базу даних у MongoDB. Діаграма структури бази даних наведено в Додатку В.
 Наступним кроком було розроблено REST API з використанням фреймворку Express.
 Щоб спростити розробку та тестування, було створено документацію API з використанням Postman. Цю специфікацію наведено в Додатку Г.
-Кожен ендпоінт був протестований у Postman, а тестова колекція збережена для подальшої роботи. Відеозапис захисту наведено в Додатку Е.
+Кожен маршрут API був протестований у Postman, а тестова колекція збережена для подальшої роботи. Відеозапис захисту наведено в Додатку Е.
 У процесі розробки API були прийняті такі технічні рішення:
-1.	Система організована за багатошаровою архітектурою:
-•	На клієнтському рівні здійснюється формування та надсилання HTTP-запитів до API.
-•	Серверний рівень реалізований за допомогою Express для обробки цих запитів.
-•	Збереження даних виконується на рівні бази, де використовується MongoDB.
-2.	Express був обраний як основний фреймворк завдяки:
-•	Легкості у використанні та швидкому налаштуванню.
-•	Гнучкій архітектурі, яка дозволяє створювати модульні додатки.
-•	Можливості інтеграції різноманітних middleware для обробки запитів.
-•	Підтримці сучасних стандартів JavaScript.
-•	Широкій екосистемі, яка надає безліч готових бібліотек і рішень.
-3.	Для роботи з базою даних використовується Mongoose ODM, яка забезпечує:
-•	Інтуїтивні інструменти для створення та налаштування схем.
-•	Вбудовану систему перевірки даних.
-•	Зручність у визначенні та управлінні зв’язками між даними.
-•	Повну підтримку сучасних можливостей JavaScript.
-4.	Валідація даних здійснюється на рівні бази даних за допомогою схем Mongoose, що дозволяє перевіряти дані перед збереженням.
-5.	MongoDB було обрано для зберігання даних завдяки її:
-•	Можливості працювати зі структурами, які легко адаптуються під зміни.
-•	Швидкому доступу до даних навіть при великому обсязі інформації.
-•	Здатності масштабуватись для підтримки зростаючих навантажень.
-•	Простому використанню документів, що нагадують формат JSON, для зручності розробки.
+а) система організована за багатошаровою архітектурою:
+    1)	на клієнтському рівні здійснюється формування та надсилання HTTP-запитів до API;
+    2)	серверний рівень реалізований за допомогою Express для обробки цих запитів;
+    3)	збереження даних виконується на рівні бази, де використовується MongoDB;
+б) Express був обраний як основний фреймворк завдяки:
+    1)	легкості у використанні та швидкому налаштуванню;
+    2)	гнучкій архітектурі, яка дозволяє створювати модульні додатки;
+    3)	можливості інтеграції різноманітних middleware для обробки запитів;
+    4)	підтримці сучасних стандартів JavaScript;
+    5)	широкій екосистемі, яка надає безліч готових бібліотек і рішень;
+в) для роботи з базою даних використовується Mongoose ODM, яка забезпечує:
+    1)	інтуїтивні інструменти для створення та налаштування схем;
+    2)	вбудовану систему перевірки даних;
+    3)	зручність у визначенні та управлінні зв’язками між даними;
+    4)	повну підтримку сучасних можливостей JavaScript;
+г) валідація даних здійснюється на рівні бази даних за допомогою схем Mongoose, що дозволяє перевіряти дані перед збереженням;
+д) MongoDB було обрано для зберігання даних завдяки її:
+    1)	можливості працювати зі структурами, які легко адаптуються під зміни;
+    2)	швидкому доступу до даних навіть при великому обсязі інформації;
+    3)	здатності масштабуватись для підтримки дедалі більших навантажень;
+    4)	простому використанню документів, що нагадують формат JSON, для зручності розробки.
 Увесь вихідний код проєкту розміщений у репозиторії GitHub, а основні частини коду наведені в Додатку Д.
 
  
@@ -69,1757 +68,1591 @@
 ДОДАТОК А
 UML ДІАГРАМА ПРЕЦЕДЕНТІВ
 
- 
-Рисунок А – UML діаграма прецедентів
+Рисунок А.1 – UML діаграма прецедентів
  
 ДОДАТОК Б
 ER ДІАГРАМА БАЗИ ДАНИХ
 
- 
-Рисунок Б – ER діаграма бази даних
- 
+Рисунок Б.1 – ER діаграма бази даних
+
 ДОДАТОК В
 ДІАГРАМА СТРУКТУРИ БАЗИ ДАНИХ
 
- 
-Рисунок В – Діаграма структури бази даних
+Рисунок В.1 – Діаграма структури бази даних
  
 ДОДАТОК Г
 СПЕЦИФІКАЦІЯ API
 
-1.	openapi: 3.0.0
-2.	info:
-3.	  title: OrderManagementSystem
-4.	  version: 1.0.0
-5.	
-6.	paths:
-7.	  /users:
-8.	    get:
-9.	      tags:
-10.	        - Users
-11.	      summary: Get all users
-12.	      description: Retrieve a list of all users
-13.	      security:
-14.	        - bearerAuth: []
-15.	      responses:
-16.	        '200':
-17.	          description: List of users retrieved successfully
-18.	          content:
-19.	            application/json:
-20.	              schema:
-21.	                type: array
-22.	                items:
-23.	                  $ref: '#/components/schemas/User'
-24.	        '500':
-25.	          description: Internal server error
-26.	          content:
-27.	            application/json:
-28.	              schema:
-29.	                $ref: '#/components/schemas/Error'
-30.	
-31.	  /users/{id}:
-32.	    get:
-33.	      tags:
-34.	        - Users
-35.	      summary: Get user by ID
-36.	      description: Retrieve a specific user by their ID
-37.	      security:
-38.	        - bearerAuth: []
-39.	      parameters:
-40.	        - name: id
-41.	          in: path
-42.	          required: true
-43.	          schema:
-44.	            type: string
-45.	          description: The ID of the user
-46.	      responses:
-47.	        '200':
-48.	          description: User details retrieved successfully
-49.	          content:
-50.	            application/json:
-51.	              schema:
-52.	                $ref: '#/components/schemas/User'
-53.	        '404':
-54.	          description: User not found
-55.	          content:
-56.	            application/json:
-57.	              schema:
-58.	                $ref: '#/components/schemas/Error'
-59.	        '500':
-60.	          description: Internal server error
-61.	          content:
-62.	            application/json:
-63.	              schema:
-64.	                $ref: '#/components/schemas/Error'
-65.	
-66.	    delete:
-67.	      tags:
-68.	        - Users
-69.	      summary: Delete user
-70.	      description: Delete an existing user
-71.	      security:
-72.	        - bearerAuth: []
-73.	      parameters:
-74.	        - name: id
-75.	          in: path
-76.	          required: true
-77.	          schema:
-78.	            type: string
-79.	          description: The ID of the user to delete
-80.	      responses:
-81.	        '200':
-82.	          description: User deleted successfully
-83.	          content:
-84.	            application/json:
-85.	              schema:
-86.	                type: object
-87.	                properties:
-88.	                  message:
-89.	                    type: string
-90.	                    example: "User deleted"
-91.	        '404':
-92.	          description: User not found
-93.	          content:
-94.	            application/json:
-95.	              schema:
-96.	                $ref: '#/components/schemas/Error'
-97.	        '500':
-98.	          description: Internal server error
-99.	          content:
-100.	            application/json:
-101.	              schema:
-102.	                $ref: '#/components/schemas/Error'
-103.	
-104.	    put:
-105.	      tags:
-106.	        - Users
-107.	      summary: Update user
-108.	      description: Update an existing user's information
-109.	      security:
-110.	        - bearerAuth: []
-111.	      parameters:
-112.	        - name: id
-113.	          in: path
-114.	          required: true
-115.	          schema:
-116.	            type: string
-117.	          description: The ID of the user to update
-118.	      requestBody:
-119.	        required: true
-120.	        content:
-121.	          application/json:
-122.	            schema:
-123.	              $ref: '#/components/schemas/UserUpdate'
-124.	      responses:
-125.	        '200':
-126.	          description: User updated successfully
-127.	          content:
-128.	            application/json:
-129.	              schema:
-130.	                $ref: '#/components/schemas/User'
-131.	        '404':
-132.	          description: User not found
-133.	          content:
-134.	            application/json:
-135.	              schema:
-136.	                $ref: '#/components/schemas/Error'
-137.	        '400':
-138.	          description: Invalid request
-139.	          content:
-140.	            application/json:
-141.	              schema:
-142.	                $ref: '#/components/schemas/Error'
-143.	
-144.	  /products:
-145.	    get:
-146.	      tags:
-147.	        - Products
-148.	      summary: Get all products
-149.	      description: Retrieve a list of all products
-150.	      responses:
-151.	        '200':
-152.	          description: List of products retrieved successfully
-153.	          content:
-154.	            application/json:
-155.	              schema:
-156.	                type: array
-157.	                items:
-158.	                  $ref: '#/components/schemas/Product'
-159.	        '500':
-160.	          description: Internal server error
-161.	          content:
-162.	            application/json:
-163.	              schema:
-164.	                $ref: '#/components/schemas/Error'
-165.	
-166.	    post:
-167.	      tags:
-168.	        - Products
-169.	      summary: Create new product
-170.	      description: Create a new product in the system
-171.	      security:
-172.	        - bearerAuth: []
-173.	      requestBody:
-174.	        required: true
-175.	        content:
-176.	          application/json:
-177.	            schema:
-178.	              $ref: '#/components/schemas/ProductCreate'
-179.	      responses:
-180.	        '201':
-181.	          description: Product created successfully
-182.	          content:
-183.	            application/json:
-184.	              schema:
-185.	                $ref: '#/components/schemas/Product'
-186.	        '400':
-187.	          description: Invalid request
-188.	          content:
-189.	            application/json:
-190.	              schema:
-191.	                $ref: '#/components/schemas/Error'
-192.	
-193.	  /products/{id}:
-194.	    get:
-195.	      tags:
-196.	        - Products
-197.	      summary: Get product by ID
-198.	      description: Retrieve a specific product by its ID
-199.	      parameters:
-200.	        - name: id
-201.	          in: path
-202.	          required: true
-203.	          schema:
-204.	            type: string
-205.	          description: The ID of the product
-206.	      responses:
-207.	        '200':
-208.	          description: Product details retrieved successfully
-209.	          content:
-210.	            application/json:
-211.	              schema:
-212.	                $ref: '#/components/schemas/Product'
-213.	        '404':
-214.	          description: Product not found
-215.	          content:
-216.	            application/json:
-217.	              schema:
-218.	                $ref: '#/components/schemas/Error'
-219.	        '500':
-220.	          description: Internal server error
-221.	          content:
-222.	            application/json:
-223.	              schema:
-224.	                $ref: '#/components/schemas/Error'
-225.	
-226.	    delete:
-227.	      tags:
-228.	        - Products
-229.	      summary: Delete product
-230.	      description: Delete an existing product
-231.	      security:
-232.	        - bearerAuth: []
-233.	      parameters:
-234.	        - name: id
-235.	          in: path
-236.	          required: true
-237.	          schema:
-238.	            type: string
-239.	          description: The ID of the product to delete
-240.	      responses:
-241.	        '200':
-242.	          description: Product deleted successfully
-243.	          content:
-244.	            application/json:
-245.	              schema:
-246.	                type: object
-247.	                properties:
-248.	                  message:
-249.	                    type: string
-250.	                    example: "Product deleted"
-251.	        '404':
-252.	          description: Product not found
-253.	          content:
-254.	            application/json:
-255.	              schema:
-256.	                $ref: '#/components/schemas/Error'
-257.	        '500':
-258.	          description: Internal server error
-259.	          content:
-260.	            application/json:
-261.	              schema:
-262.	                $ref: '#/components/schemas/Error'
-263.	
-264.	    put:
-265.	      tags:
-266.	        - Products
-267.	      summary: Update product
-268.	      description: Update an existing product's information
-269.	      security:
-270.	        - bearerAuth: []
-271.	      parameters:
-272.	        - name: id
-273.	          in: path
-274.	          required: true
-275.	          schema:
-276.	            type: string
-277.	          description: The ID of the product to update
-278.	      requestBody:
-279.	        required: true
-280.	        content:
-281.	          application/json:
-282.	            schema:
-283.	              $ref: '#/components/schemas/ProductUpdate'
-284.	      responses:
-285.	        '200':
-286.	          description: Product updated successfully
-287.	          content:
-288.	            application/json:
-289.	              schema:
-290.	                $ref: '#/components/schemas/Product'
-291.	        '404':
-292.	          description: Product not found
-293.	          content:
-294.	            application/json:
-295.	              schema:
-296.	                $ref: '#/components/schemas/Error'
-297.	        '400':
-298.	          description: Invalid request
-299.	          content:
-300.	            application/json:
-301.	              schema:
-302.	                $ref: '#/components/schemas/Error'
-303.	
-304.	  /products/brand/{brand}:
-305.	    get:
-306.	      tags:
-307.	        - Products
-308.	      summary: Get products by brand
-309.	      description: Retrieve all products of a specific brand
-310.	      parameters:
-311.	        - name: brand
-312.	          in: path
-313.	          required: true
-314.	          schema:
-315.	            type: string
-316.	          description: The brand name to filter by
-317.	      responses:
-318.	        '200':
-319.	          description: List of products retrieved successfully
-320.	          content:
-321.	            application/json:
-322.	              schema:
-323.	                type: array
-324.	                items:
-325.	                  $ref: '#/components/schemas/Product'
-326.	        '500':
-327.	          description: Internal server error
-328.	          content:
-329.	            application/json:
-330.	              schema:
-331.	                $ref: '#/components/schemas/Error'
-332.	
-333.	  /products/size/{size}:
-334.	    get:
-335.	      tags:
-336.	        - Products
-337.	      summary: Get products by size
-338.	      description: Retrieve all products of a specific size
-339.	      parameters:
-340.	        - name: size
-341.	          in: path
-342.	          required: true
-343.	          schema:
-344.	            type: string
-345.	          description: The size to filter by
-346.	      responses:
-347.	        '200':
-348.	          description: List of products retrieved successfully
-349.	          content:
-350.	            application/json:
-351.	              schema:
-352.	                type: array
-353.	                items:
-354.	                  $ref: '#/components/schemas/Product'
-355.	        '500':
-356.	          description: Internal server error
-357.	          content:
-358.	            application/json:
-359.	              schema:
-360.	                $ref: '#/components/schemas/Error'
-361.	
-362.	  /products/type/{type}:
-363.	    get:
-364.	      tags:
-365.	        - Products
-366.	      summary: Get products by type
-367.	      description: Retrieve all products of a specific type
-368.	      parameters:
-369.	        - name: type
-370.	          in: path
-371.	          required: true
-372.	          schema:
-373.	            type: string
-374.	          description: The type to filter by
-375.	      responses:
-376.	        '200':
-377.	          description: List of products retrieved successfully
-378.	          content:
-379.	            application/json:
-380.	              schema:
-381.	                type: array
-382.	                items:
-383.	                  $ref: '#/components/schemas/Product'
-384.	        '500':
-385.	          description: Internal server error
-386.	          content:
-387.	            application/json:
-388.	              schema:
-389.	                $ref: '#/components/schemas/Error'
-390.	
-391.	  /products/price/{min}/{max}:
-392.	    get:
-393.	      tags:
-394.	        - Products
-395.	      summary: Get products by price range
-396.	      description: Retrieve all products within a specific price range
-397.	      parameters:
-398.	        - name: min
-399.	          in: path
-400.	          required: true
-401.	          schema:
-402.	            type: number
-403.	          description: Minimum price
-404.	        - name: max
-405.	          in: path
-406.	          required: true
-407.	          schema:
-408.	            type: number
-409.	          description: Maximum price
-410.	      responses:
-411.	        '200':
-412.	          description: List of products retrieved successfully
-413.	          content:
-414.	            application/json:
-415.	              schema:
-416.	                type: array
-417.	                items:
-418.	                  $ref: '#/components/schemas/Product'
-419.	        '500':
-420.	          description: Internal server error
-421.	          content:
-422.	            application/json:
-423.	              schema:
-424.	                $ref: '#/components/schemas/Error'
-425.	
-426.	  /products/quantity/{min}/{max}:
-427.	    get:
-428.	      tags:
-429.	        - Products
-430.	      summary: Get products by quantity range
-431.	      description: Retrieve all products within a specific quantity range
-432.	      parameters:
-433.	        - name: min
-434.	          in: path
-435.	          required: true
-436.	          schema:
-437.	            type: number
-438.	          description: Minimum quantity
-439.	        - name: max
-440.	          in: path
-441.	          required: true
-442.	          schema:
-443.	            type: number
-444.	          description: Maximum quantity
-445.	      responses:
-446.	        '200':
-447.	          description: List of products retrieved successfully
-448.	          content:
-449.	            application/json:
-450.	              schema:
-451.	                type: array
-452.	                items:
-453.	                  $ref: '#/components/schemas/Product'
-454.	        '500':
-455.	          description: Internal server error
-456.	          content:
-457.	            application/json:
-458.	              schema:
-459.	                $ref: '#/components/schemas/Error'
-460.	
-461.	  /payments:
-462.	    get:
-463.	      tags:
-464.	        - Payments
-465.	      summary: Get all payments
-466.	      description: Retrieve a list of all payments with populated references
-467.	      security:
-468.	        - bearerAuth: []
-469.	      responses:
-470.	        '200':
-471.	          description: List of payments retrieved successfully
-472.	          content:
-473.	            application/json:
-474.	              schema:
-475.	                type: array
-476.	                items:
-477.	                  $ref: '#/components/schemas/Payment'
-478.	        '500':
-479.	          description: Internal server error
-480.	          content:
-481.	            application/json:
-482.	              schema:
-483.	                $ref: '#/components/schemas/Error'
-484.	
-485.	    post:
-486.	      tags:
-487.	        - Payments
-488.	      summary: Create new payment
-489.	      description: Create a new payment in the system
-490.	      security:
-491.	        - bearerAuth: []
-492.	      requestBody:
-493.	        required: true
-494.	        content:
-495.	          application/json:
-496.	            schema:
-497.	              $ref: '#/components/schemas/PaymentCreate'
-498.	      responses:
-499.	        '201':
-500.	          description: Payment created successfully
-501.	          content:
-502.	            application/json:
-503.	              schema:
-504.	                $ref: '#/components/schemas/Payment'
-505.	        '400':
-506.	          description: Invalid request
-507.	          content:
-508.	            application/json:
-509.	              schema:
-510.	                $ref: '#/components/schemas/Error'
-511.	
-512.	  /payments/order/{orderId}:
-513.	    get:
-514.	      tags:
-515.	        - Payments
-516.	      summary: Get payments by order ID
-517.	      description: Retrieve all payments for a specific order
-518.	      security:
-519.	        - bearerAuth: []
-520.	      parameters:
-521.	        - name: orderId
-522.	          in: path
-523.	          required: true
-524.	          schema:
-525.	            type: string
-526.	          description: The ID of the order
-527.	      responses:
-528.	        '200':
-529.	          description: List of payments retrieved successfully
-530.	          content:
-531.	            application/json:
-532.	              schema:
-533.	                type: array
-534.	                items:
-535.	                  $ref: '#/components/schemas/Payment'
-536.	        '500':
-537.	          description: Internal server error
-538.	          content:
-539.	            application/json:
-540.	              schema:
-541.	                $ref: '#/components/schemas/Error'
-542.	
-543.	  /payments/user/{userId}:
-544.	    get:
-545.	      tags:
-546.	        - Payments
-547.	      summary: Get payments by user ID
-548.	      description: Retrieve all payments for a specific user
-549.	      security:
-550.	        - bearerAuth: []
-551.	      parameters:
-552.	        - name: userId
-553.	          in: path
-554.	          required: true
-555.	          schema:
-556.	            type: string
-557.	          description: The ID of the user
-558.	      responses:
-559.	        '200':
-560.	          description: List of payments retrieved successfully
-561.	          content:
-562.	            application/json:
-563.	              schema:
-564.	                type: array
-565.	                items:
-566.	                  $ref: '#/components/schemas/Payment'
-567.	        '500':
-568.	          description: Internal server error
-569.	          content:
-570.	            application/json:
-571.	              schema:
-572.	                $ref: '#/components/schemas/Error'
-573.	
-574.	  /payments/status/{status}:
-575.	    get:
-576.	      tags:
-577.	        - Payments
-578.	      summary: Get payments by status
-579.	      description: Retrieve all payments with a specific status
-580.	      security:
-581.	        - bearerAuth: []
-582.	      parameters:
-583.	        - name: status
-584.	          in: path
-585.	          required: true
-586.	          schema:
-587.	            type: string
-588.	          description: The payment status to filter by
-589.	          example: "completed"
-590.	      responses:
-591.	        '200':
-592.	          description: List of payments retrieved successfully
-593.	          content:
-594.	            application/json:
-595.	              schema:
-596.	                type: array
-597.	                items:
-598.	                  $ref: '#/components/schemas/Payment'
-599.	        '500':
-600.	          description: Internal server error
-601.	          content:
-602.	            application/json:
-603.	              schema:
-604.	                $ref: '#/components/schemas/Error'
-605.	
-606.	  /payments/{id}:
-607.	    delete:
-608.	      tags:
-609.	        - Payments
-610.	      summary: Delete payment
-611.	      description: Delete an existing payment
-612.	      security:
-613.	        - bearerAuth: []
-614.	      parameters:
-615.	        - name: id
-616.	          in: path
-617.	          required: true
-618.	          schema:
-619.	            type: string
-620.	          description: The ID of the payment to delete
-621.	      responses:
-622.	        '200':
-623.	          description: Payment deleted successfully
-624.	          content:
-625.	            application/json:
-626.	              schema:
-627.	                type: object
-628.	                properties:
-629.	                  message:
-630.	                    type: string
-631.	                    example: "Payment deleted"
-632.	        '404':
-633.	          description: Payment not found
-634.	          content:
-635.	            application/json:
-636.	              schema:
-637.	                $ref: '#/components/schemas/Error'
-638.	        '500':
-639.	          description: Internal server error
-640.	          content:
-641.	            application/json:
-642.	              schema:
-643.	                $ref: '#/components/schemas/Error'
-644.	
-645.	    /orders:
-646.	    get:
-647.	      tags:
-648.	        - Orders
-649.	      summary: Get all orders
-650.	      description: Retrieve a list of all orders with populated user information
-651.	      security:
-652.	        - bearerAuth: []
-653.	      responses:
-654.	        '200':
-655.	          description: List of orders retrieved successfully
-656.	          content:
-657.	            application/json:
-658.	              schema:
-659.	                type: array
-660.	                items:
-661.	                  $ref: '#/components/schemas/Order'
-662.	        '500':
-663.	          description: Internal server error
-664.	          content:
-665.	            application/json:
-666.	              schema:
-667.	                $ref: '#/components/schemas/Error'
-668.	
-669.	    post:
-670.	      tags:
-671.	        - Orders
-672.	      summary: Create new order
-673.	      description: Create a new order in the system
-674.	      security:
-675.	        - bearerAuth: []
-676.	      requestBody:
-677.	        required: true
-678.	        content:
-679.	          application/json:
-680.	            schema:
-681.	              $ref: '#/components/schemas/OrderCreate'
-682.	      responses:
-683.	        '201':
-684.	          description: Order created successfully
-685.	          content:
-686.	            application/json:
-687.	              schema:
-688.	                $ref: '#/components/schemas/Order'
-689.	        '400':
-690.	          description: Invalid request
-691.	          content:
-692.	            application/json:
-693.	              schema:
-694.	                $ref: '#/components/schemas/Error'
-695.	
-696.	  /orders/{id}:
-697.	    get:
-698.	      tags:
-699.	        - Orders
-700.	      summary: Get order by ID
-701.	      description: Retrieve a specific order by its ID
-702.	      security:
-703.	        - bearerAuth: []
-704.	      parameters:
-705.	        - name: id
-706.	          in: path
-707.	          required: true
-708.	          schema:
-709.	            type: string
-710.	          description: The ID of the order
-711.	      responses:
-712.	        '200':
-713.	          description: Order details retrieved successfully
-714.	          content:
-715.	            application/json:
-716.	              schema:
-717.	                $ref: '#/components/schemas/Order'
-718.	        '404':
-719.	          description: Order not found
-720.	          content:
-721.	            application/json:
-722.	              schema:
-723.	                $ref: '#/components/schemas/Error'
-724.	        '500':
-725.	          description: Internal server error
-726.	          content:
-727.	            application/json:
-728.	              schema:
-729.	                $ref: '#/components/schemas/Error'
-730.	
-731.	    delete:
-732.	      tags:
-733.	        - Orders
-734.	      summary: Delete order
-735.	      description: Delete an existing order
-736.	      security:
-737.	        - bearerAuth: []
-738.	      parameters:
-739.	        - name: id
-740.	          in: path
-741.	          required: true
-742.	          schema:
-743.	            type: string
-744.	          description: The ID of the order to delete
-745.	      responses:
-746.	        '200':
-747.	          description: Order deleted successfully
-748.	          content:
-749.	            application/json:
-750.	              schema:
-751.	                type: object
-752.	                properties:
-753.	                  message:
-754.	                    type: string
-755.	                    example: "Order deleted"
-756.	        '404':
-757.	          description: Order not found
-758.	          content:
-759.	            application/json:
-760.	              schema:
-761.	                $ref: '#/components/schemas/Error'
-762.	        '500':
-763.	          description: Internal server error
-764.	          content:
-765.	            application/json:
-766.	              schema:
-767.	                $ref: '#/components/schemas/Error'
-768.	
-769.	  /orders/user/{userId}:
-770.	    get:
-771.	      tags:
-772.	        - Orders
-773.	      summary: Get orders by user ID
-774.	      description: Retrieve all orders for a specific user
-775.	      security:
-776.	        - bearerAuth: []
-777.	      parameters:
-778.	        - name: userId
-779.	          in: path
-780.	          required: true
-781.	          schema:
-782.	            type: string
-783.	          description: The ID of the user
-784.	      responses:
-785.	        '200':
-786.	          description: List of orders retrieved successfully
-787.	          content:
-788.	            application/json:
-789.	              schema:
-790.	                type: array
-791.	                items:
-792.	                  $ref: '#/components/schemas/Order'
-793.	        '404':
-794.	          description: Orders not found for this user
-795.	          content:
-796.	            application/json:
-797.	              schema:
-798.	                $ref: '#/components/schemas/Error'
-799.	        '500':
-800.	          description: Internal server error
-801.	          content:
-802.	            application/json:
-803.	              schema:
-804.	                $ref: '#/components/schemas/Error'
-805.	
-806.	  /orders/status/{status}:
-807.	    get:
-808.	      tags:
-809.	        - Orders
-810.	      summary: Get orders by status
-811.	      description: Retrieve all orders with a specific status
-812.	      security:
-813.	        - bearerAuth: []
-814.	      parameters:
-815.	        - name: status
-816.	          in: path
-817.	          required: true
-818.	          schema:
-819.	            type: string
-820.	          description: The order status to filter by
-821.	          example: "pending"
-822.	      responses:
-823.	        '200':
-824.	          description: List of orders retrieved successfully
-825.	          content:
-826.	            application/json:
-827.	              schema:
-828.	                type: array
-829.	                items:
-830.	                  $ref: '#/components/schemas/Order'
-831.	        '404':
-832.	          description: Orders not found with this status
-833.	          content:
-834.	            application/json:
-835.	              schema:
-836.	                $ref: '#/components/schemas/Error'
-837.	        '500':
-838.	          description: Internal server error
-839.	          content:
-840.	            application/json:
-841.	              schema:
-842.	                $ref: '#/components/schemas/Error'
-843.	
-844.	  /orders/date/{startDate}/{endDate}:
-845.	    get:
-846.	      tags:
-847.	        - Orders
-848.	      summary: Get orders by date range
-849.	      description: Retrieve all orders within a specific date range
-850.	      security:
-851.	        - bearerAuth: []
-852.	      parameters:
-853.	        - name: startDate
-854.	          in: path
-855.	          required: true
-856.	          schema:
-857.	            type: string
-858.	            format: date
-859.	          description: Start date (YYYY-MM-DD)
-860.	          example: "2023-01-01"
-861.	        - name: endDate
-862.	          in: path
-863.	          required: true
-864.	          schema:
-865.	            type: string
-866.	            format: date
-867.	          description: End date (YYYY-MM-DD)
-868.	          example: "2023-12-31"
-869.	      responses:
-870.	        '200':
-871.	          description: List of orders retrieved successfully
-872.	          content:
-873.	            application/json:
-874.	              schema:
-875.	                type: array
-876.	                items:
-877.	                  $ref: '#/components/schemas/Order'
-878.	        '404':
-879.	          description: No orders found in this date range
-880.	          content:
-881.	            application/json:
-882.	              schema:
-883.	                $ref: '#/components/schemas/Error'
-884.	        '500':
-885.	          description: Internal server error
-886.	          content:
-887.	            application/json:
-888.	              schema:
-889.	                $ref: '#/components/schemas/Error'
-890.	
-891.	    /order-items:
-892.	    get:
-893.	      tags:
-894.	        - Order Items
-895.	      summary: Get all order items
-896.	      description: Retrieve a list of all order items with populated references
-897.	      security:
-898.	        - bearerAuth: []
-899.	      responses:
-900.	        '200':
-901.	          description: List of order items retrieved successfully
-902.	          content:
-903.	            application/json:
-904.	              schema:
-905.	                type: array
-906.	                items:
-907.	                  $ref: '#/components/schemas/OrderItem'
-908.	        '500':
-909.	          description: Internal server error
-910.	          content:
-911.	            application/json:
-912.	              schema:
-913.	                $ref: '#/components/schemas/Error'
-914.	
-915.	    post:
-916.	      tags:
-917.	        - Order Items
-918.	      summary: Create new order item
-919.	      description: Create a new order item in the system
-920.	      security:
-921.	        - bearerAuth: []
-922.	      requestBody:
-923.	        required: true
-924.	        content:
-925.	          application/json:
-926.	            schema:
-927.	              $ref: '#/components/schemas/OrderItemCreate'
-928.	      responses:
-929.	        '201':
-930.	          description: Order item created successfully
-931.	          content:
-932.	            application/json:
-933.	              schema:
-934.	                $ref: '#/components/schemas/OrderItem'
-935.	        '400':
-936.	          description: Invalid request
-937.	          content:
-938.	            application/json:
-939.	              schema:
-940.	                $ref: '#/components/schemas/Error'
-941.	
-942.	  /order-items/order/{orderId}:
-943.	    get:
-944.	      tags:
-945.	        - Order Items
-946.	      summary: Get order items by order ID
-947.	      description: Retrieve all order items for a specific order
-948.	      security:
-949.	        - bearerAuth: []
-950.	      parameters:
-951.	        - name: orderId
-952.	          in: path
-953.	          required: true
-954.	          schema:
-955.	            type: string
-956.	          description: The ID of the order
-957.	      responses:
-958.	        '200':
-959.	          description: List of order items retrieved successfully
-960.	          content:
-961.	            application/json:
-962.	              schema:
-963.	                type: array
-964.	                items:
-965.	                  $ref: '#/components/schemas/OrderItem'
-966.	        '500':
-967.	          description: Internal server error
-968.	          content:
-969.	            application/json:
-970.	              schema:
-971.	                $ref: '#/components/schemas/Error'
-972.	
-973.	  /order-items/product/{productId}:
-974.	    get:
-975.	      tags:
-976.	        - Order Items
-977.	      summary: Get order items by product ID
-978.	      description: Retrieve all order items for a specific product
-979.	      security:
-980.	        - bearerAuth: []
-981.	      parameters:
-982.	        - name: productId
-983.	          in: path
-984.	          required: true
-985.	          schema:
-986.	            type: string
-987.	          description: The ID of the product
-988.	      responses:
-989.	        '200':
-990.	          description: List of order items retrieved successfully
-991.	          content:
-992.	            application/json:
-993.	              schema:
-994.	                type: array
-995.	                items:
-996.	                  $ref: '#/components/schemas/OrderItem'
-997.	        '500':
-998.	          description: Internal server error
-999.	          content:
-1000.	            application/json:
-1001.	              schema:
-1002.	                $ref: '#/components/schemas/Error'
-1003.	
-1004.	  /order-items/quantity/{min}/{max}:
-1005.	    get:
-1006.	      tags:
-1007.	        - Order Items
-1008.	      summary: Get order items by quantity range
-1009.	      description: Retrieve all order items within a specific quantity range
-1010.	      security:
-1011.	        - bearerAuth: []
-1012.	      parameters:
-1013.	        - name: min
-1014.	          in: path
-1015.	          required: true
-1016.	          schema:
-1017.	            type: number
-1018.	          description: Minimum quantity
-1019.	          example: 1
-1020.	        - name: max
-1021.	          in: path
-1022.	          required: true
-1023.	          schema:
-1024.	            type: number
-1025.	          description: Maximum quantity
-1026.	          example: 10
-1027.	      responses:
-1028.	        '200':
-1029.	          description: List of order items retrieved successfully
-1030.	          content:
-1031.	            application/json:
-1032.	              schema:
-1033.	                type: array
-1034.	                items:
-1035.	                  $ref: '#/components/schemas/OrderItem'
-1036.	        '500':
-1037.	          description: Internal server error
-1038.	          content:
-1039.	            application/json:
-1040.	              schema:
-1041.	                $ref: '#/components/schemas/Error'
-1042.	
-1043.	  /order-items/popular/{startDate}/{endDate}:
-1044.	    get:
-1045.	      tags:
-1046.	        - Order Items
-1047.	      summary: Get most popular product
-1048.	      description: Retrieve the most popular product within a date range based on ordered quantity
-1049.	      security:
-1050.	        - bearerAuth: []
-1051.	      parameters:
-1052.	        - name: startDate
-1053.	          in: path
-1054.	          required: true
-1055.	          schema:
-1056.	            type: string
-1057.	            format: date
-1058.	          description: Start date (YYYY-MM-DD)
-1059.	          example: "2023-01-01"
-1060.	        - name: endDate
-1061.	          in: path
-1062.	          required: true
-1063.	          schema:
-1064.	            type: string
-1065.	            format: date
-1066.	          description: End date (YYYY-MM-DD)
-1067.	          example: "2023-12-31"
-1068.	      responses:
-1069.	        '200':
-1070.	          description: Popular product information retrieved successfully
-1071.	          content:
-1072.	            application/json:
-1073.	              schema:
-1074.	                type: array
-1075.	                items:
-1076.	                  type: object
-1077.	                  properties:
-1078.	                    _id:
-1079.	                      $ref: '#/components/schemas/Product'
-1080.	                    totalQuantity:
-1081.	                      type: number
-1082.	                      description: Total quantity ordered
-1083.	                      example: 100
-1084.	        '404':
-1085.	          description: No popular product found in this date range
-1086.	          content:
-1087.	            application/json:
-1088.	              schema:
-1089.	                $ref: '#/components/schemas/Error'
-1090.	        '500':
-1091.	          description: Internal server error
-1092.	          content:
-1093.	            application/json:
-1094.	              schema:
-1095.	                $ref: '#/components/schemas/Error'
-1096.	
-1097.	  /order-items/{id}:
-1098.	    delete:
-1099.	      tags:
-1100.	        - Order Items
-1101.	      summary: Delete order item
-1102.	      description: Delete an existing order item
-1103.	      security:
-1104.	        - bearerAuth: []
-1105.	      parameters:
-1106.	        - name: id
-1107.	          in: path
-1108.	          required: true
-1109.	          schema:
-1110.	            type: string
-1111.	          description: The ID of the order item to delete
-1112.	      responses:
-1113.	        '200':
-1114.	          description: Order item deleted successfully
-1115.	          content:
-1116.	            application/json:
-1117.	              schema:
-1118.	                type: object
-1119.	                properties:
-1120.	                  message:
-1121.	                    type: string
-1122.	                    example: "Order item deleted"
-1123.	        '404':
-1124.	          description: Order item not found
-1125.	          content:
-1126.	            application/json:
-1127.	              schema:
-1128.	                $ref: '#/components/schemas/Error'
-1129.	        '500':
-1130.	          description: Internal server error
-1131.	          content:
-1132.	            application/json:
-1133.	              schema:
-1134.	                $ref: '#/components/schemas/Error'
-1135.	
-1136.	    /auth/register:
-1137.	    post:
-1138.	      tags:
-1139.	        - Authentication
-1140.	      summary: Register new user
-1141.	      description: Create a new user account
-1142.	      requestBody:
-1143.	        required: true
-1144.	        content:
-1145.	          application/json:
-1146.	            schema:
-1147.	              type: object
-1148.	              required:
-1149.	                - role
-1150.	                - name
-1151.	                - email
-1152.	                - password
-1153.	              properties:
-1154.	                role:
-1155.	                  type: string
-1156.	                  description: User's role in the system
-1157.	                  example: "user"
-1158.	                name:
-1159.	                  type: string
-1160.	                  description: User's full name
-1161.	                  example: "John Doe"
-1162.	                email:
-1163.	                  type: string
-1164.	                  format: email
-1165.	                  description: User's email address
-1166.	                  example: "john@example.com"
-1167.	                password:
-1168.	                  type: string
-1169.	                  format: password
-1170.	                  description: User's password (min 6 characters)
-1171.	                  example: "password123"
-1172.	      responses:
-1173.	        '201':
-1174.	          description: User registered successfully
-1175.	          content:
-1176.	            application/json:
-1177.	              schema:
-1178.	                $ref: '#/components/schemas/User'
-1179.	        '400':
-1180.	          description: Invalid request or email already exists
-1181.	          content:
-1182.	            application/json:
-1183.	              schema:
-1184.	                $ref: '#/components/schemas/Error'
-1185.	
-1186.	  /auth/login:
-1187.	    post:
-1188.	      tags:
-1189.	        - Authentication
-1190.	      summary: Login user
-1191.	      description: Authenticate user and receive JWT token
-1192.	      requestBody:
-1193.	        required: true
-1194.	        content:
-1195.	          application/json:
-1196.	            schema:
-1197.	              type: object
-1198.	              required:
-1199.	                - email
-1200.	                - password
-1201.	              properties:
-1202.	                email:
-1203.	                  type: string
-1204.	                  format: email
-1205.	                  description: User's email address
-1206.	                  example: "john@example.com"
-1207.	                password:
-1208.	                  type: string
-1209.	                  format: password
-1210.	                  description: User's password
-1211.	                  example: "password123"
-1212.	      responses:
-1213.	        '200':
-1214.	          description: Login successful
-1215.	          content:
-1216.	            application/json:
-1217.	              schema:
-1218.	                type: object
-1219.	                properties:
-1220.	                  token:
-1221.	                    type: string
-1222.	                    description: JWT authentication token
-1223.	                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-1224.	        '400':
-1225.	          description: Invalid credentials
-1226.	          content:
-1227.	            application/json:
-1228.	              schema:
-1229.	                $ref: '#/components/schemas/Error'
-1230.	        '404':
-1231.	          description: User not found
-1232.	          content:
-1233.	            application/json:
-1234.	              schema:
-1235.	                $ref: '#/components/schemas/Error'
-1236.	        '500':
-1237.	          description: Internal server error
-1238.	          content:
-1239.	            application/json:
-1240.	              schema:
-1241.	                $ref: '#/components/schemas/Error'
-1242.	
-1243.	components:
-1244.	  schemas:
-1245.	    User:
-1246.	      type: object
-1247.	      properties:
-1248.	        id:
-1249.	          type: string
-1250.	          description: The user's unique identifier
-1251.	          example: "60d725c6e4b7e4001f8c7f2d"
-1252.	        role:
-1253.	          type: string
-1254.	          description: The user's role in the system
-1255.	          example: "admin"
-1256.	        name:
-1257.	          type: string
-1258.	          description: The user's name
-1259.	          example: "John Doe"
-1260.	        email:
-1261.	          type: string
-1262.	          format: email
-1263.	          description: The user's email address
-1264.	          example: "john@example.com"
-1265.	        createdAt:
-1266.	          type: string
-1267.	          format: date-time
-1268.	          description: User creation timestamp
-1269.	          example: "2023-01-01T00:00:00Z"
-1270.	
-1271.	    UserUpdate:
-1272.	      type: object
-1273.	      properties:
-1274.	        role:
-1275.	          type: string
-1276.	          description: The user's role
-1277.	          example: "user"
-1278.	        name:
-1279.	          type: string
-1280.	          description: The user's name
-1281.	          example: "John Doe"
-1282.	        email:
-1283.	          type: string
-1284.	          format: email
-1285.	          description: The user's email address
-1286.	          example: "john@example.com"
-1287.	        password:
-1288.	          type: string
-1289.	          format: password
-1290.	          description: The user's password
-1291.	          example: "newPassword123"
-1292.	
-1293.	    Product:
-1294.	      type: object
-1295.	      properties:
-1296.	        id:
-1297.	          type: string
-1298.	          description: The product's unique identifier
-1299.	          example: "60d725c6e4b7e4001f8c7f2e"
-1300.	        name:
-1301.	          type: string
-1302.	          description: The product's name
-1303.	          example: "Nike Air Max"
-1304.	        description:
-1305.	          type: string
-1306.	          description: The product's description
-1307.	          example: "Comfortable running shoes with air cushioning"
-1308.	        brand:
-1309.	          type: string
-1310.	          description: The product's brand
-1311.	          example: "Nike"
-1312.	        size:
-1313.	          type: string
-1314.	          description: The product's size
-1315.	          example: "42"
-1316.	        type:
-1317.	          type: string
-1318.	          description: The product's type
-1319.	          example: "Sneakers"
-1320.	        price:
-1321.	          type: number
-1322.	          description: The product's price
-1323.	          example: 129.99
-1324.	        quantity:
-1325.	          type: number
-1326.	          description: Available quantity of the product
-1327.	          example: 50
-1328.	        createdAt:
-1329.	          type: string
-1330.	          format: date-time
-1331.	          description: Product creation timestamp
-1332.	          example: "2023-01-01T00:00:00Z"
-1333.	
-1334.	    ProductCreate:
-1335.	      type: object
-1336.	      required:
-1337.	        - name
-1338.	        - description
-1339.	        - brand
-1340.	        - size
-1341.	        - type
-1342.	        - price
-1343.	        - quantity
-1344.	      properties:
-1345.	        name:
-1346.	          type: string
-1347.	          description: The product's name
-1348.	          example: "Nike Air Max"
-1349.	        description:
-1350.	          type: string
-1351.	          description: The product's description
-1352.	          example: "Comfortable running shoes with air cushioning"
-1353.	        brand:
-1354.	          type: string
-1355.	          description: The product's brand
-1356.	          example: "Nike"
-1357.	        size:
-1358.	          type: string
-1359.	          description: The product's size
-1360.	          example: "42"
-1361.	        type:
-1362.	          type: string
-1363.	          description: The product's type
-1364.	          example: "Sneakers"
-1365.	        price:
-1366.	          type: number
-1367.	          description: The product's price
-1368.	          example: 129.99
-1369.	        quantity:
-1370.	          type: number
-1371.	          description: Available quantity of the product
-1372.	          example: 50
-1373.	
-1374.	    ProductUpdate:
-1375.	      type: object
-1376.	      properties:
-1377.	        name:
-1378.	          type: string
-1379.	          description: The product's name
-1380.	          example: "Nike Air Max"
-1381.	        description:
-1382.	          type: string
-1383.	          description: The product's description
-1384.	          example: "Comfortable running shoes with air cushioning"
-1385.	        brand:
-1386.	          type: string
-1387.	          description: The product's brand
-1388.	          example: "Nike"
-1389.	        size:
-1390.	          type: string
-1391.	          description: The product's size
-1392.	          example: "42"
-1393.	        type:
-1394.	          type: string
-1395.	          description: The product's type
-1396.	          example: "Sneakers"
-1397.	        price:
-1398.	          type: number
-1399.	          description: The product's price
-1400.	          example: 129.99
-1401.	        quantity:
-1402.	          type: number
-1403.	          description: Available quantity of the product
-1404.	          example: 50
-1405.	
-1406.	    Order:
-1407.	      type: object
-1408.	      properties:
-1409.	        id:
-1410.	          type: string
-1411.	          description: The order's unique identifier
-1412.	          example: "60d725c6e4b7e4001f8c7f2f"
-1413.	        user_id:
-1414.	          type: object
-1415.	          description: Reference to the user who placed the order
-1416.	          $ref: '#/components/schemas/User'
-1417.	        total_price:
-1418.	          type: number
-1419.	          description: The total price of the order
-1420.	          example: 259.98
-1421.	        status:
-1422.	          type: string
-1423.	          description: The order status
-1424.	          example: "pending"
-1425.	        createdAt:
-1426.	          type: string
-1427.	          format: date-time
-1428.	          description: Order creation timestamp
-1429.	          example: "2023-01-01T00:00:00Z"
-1430.	        updatedAt:
-1431.	          type: string
-1432.	          format: date-time
-1433.	          description: Order last update timestamp
-1434.	          example: "2023-01-01T00:00:00Z"
-1435.	
-1436.	    OrderCreate:
-1437.	      type: object
-1438.	      required:
-1439.	        - user_id
-1440.	        - total_price
-1441.	        - status
-1442.	      properties:
-1443.	        user_id:
-1444.	          type: string
-1445.	          description: The ID of the user placing the order
-1446.	          example: "60d725c6e4b7e4001f8c7f2d"
-1447.	        total_price:
-1448.	          type: number
-1449.	          description: The total price of the order
-1450.	          example: 259.98
-1451.	        status:
-1452.	          type: string
-1453.	          description: The initial status of the order
-1454.	          example: "pending"
-1455.	
-1456.	    OrderItem:
-1457.	      type: object
-1458.	      properties:
-1459.	        id:
-1460.	          type: string
-1461.	          description: The order item's unique identifier
-1462.	          example: "60d725c6e4b7e4001f8c7f2f"
-1463.	        order_id:
-1464.	          type: object
-1465.	          description: Reference to the order
-1466.	          $ref: '#/components/schemas/Order'
-1467.	        product_id:
-1468.	          type: object
-1469.	          description: Reference to the product
-1470.	          $ref: '#/components/schemas/Product'
-1471.	        user_id:
-1472.	          type: object
-1473.	          description: Reference to the user
-1474.	          $ref: '#/components/schemas/User'
-1475.	        quantity:
-1476.	          type: number
-1477.	          description: Quantity of products ordered
-1478.	          example: 2
-1479.	        price_per_item:
-1480.	          type: number
-1481.	          description: Price per single item
-1482.	          example: 129.99
-1483.	        createdAt:
-1484.	          type: string
-1485.	          format: date-time
-1486.	          description: Order item creation timestamp
-1487.	          example: "2023-01-01T00:00:00Z"
-1488.	        updatedAt:
-1489.	          type: string
-1490.	          format: date-time
-1491.	          description: Order item last update timestamp
-1492.	          example: "2023-01-01T00:00:00Z"
-1493.	
-1494.	    OrderItemCreate:
-1495.	      type: object
-1496.	      required:
-1497.	        - order_id
-1498.	        - product_id
-1499.	        - user_id
-1500.	        - quantity
-1501.	        - price_per_item
-1502.	      properties:
-1503.	        order_id:
-1504.	          type: string
-1505.	          description: The ID of the order
-1506.	          example: "60d725c6e4b7e4001f8c7f2f"
-1507.	        product_id:
-1508.	          type: string
-1509.	          description: The ID of the product
-1510.	          example: "60d725c6e4b7e4001f8c7f2e"
-1511.	        user_id:
-1512.	          type: string
-1513.	          description: The ID of the user
-1514.	          example: "60d725c6e4b7e4001f8c7f2d"
-1515.	        quantity:
-1516.	          type: number
-1517.	          description: Quantity of products to order
-1518.	          example: 2
-1519.	        price_per_item:
-1520.	          type: number
-1521.	          description: Price per single item
-1522.	          example: 129.99
-1523.	
-1524.	    Payment:
-1525.	      type: object
-1526.	      properties:
-1527.	        id:
-1528.	          type: string
-1529.	          description: The payment's unique identifier
-1530.	          example: "60d725c6e4b7e4001f8c7f30"
-1531.	        order_id:
-1532.	          type: object
-1533.	          description: Reference to the order
-1534.	          $ref: '#/components/schemas/Order'
-1535.	        user_id:
-1536.	          type: object
-1537.	          description: Reference to the user
-1538.	          $ref: '#/components/schemas/User'
-1539.	        product_id:
-1540.	          type: object
-1541.	          description: Reference to the product
-1542.	          $ref: '#/components/schemas/Product'
-1543.	        amount:
-1544.	          type: number
-1545.	          description: Payment amount
-1546.	          example: 259.98
-1547.	        status:
-1548.	          type: string
-1549.	          description: Payment status
-1550.	          example: "completed"
-1551.	        createdAt:
-1552.	          type: string
-1553.	          format: date-time
-1554.	          description: Payment creation timestamp
-1555.	          example: "2023-01-01T00:00:00Z"
-1556.	
-1557.	    PaymentCreate:
-1558.	      type: object
-1559.	      required:
-1560.	        - order_id
-1561.	        - user_id
-1562.	        - product_id
-1563.	        - amount
-1564.	        - status
-1565.	      properties:
-1566.	        order_id:
-1567.	          type: string
-1568.	          description: The ID of the order
-1569.	          example: "60d725c6e4b7e4001f8c7f2f"
-1570.	        user_id:
-1571.	          type: string
-1572.	          description: The ID of the user
-1573.	          example: "60d725c6e4b7e4001f8c7f2d"
-1574.	        product_id:
-1575.	          type: string
-1576.	          description: The ID of the product
-1577.	          example: "60d725c6e4b7e4001f8c7f2e"
-1578.	        amount:
-1579.	          type: number
-1580.	          description: Payment amount
-1581.	          example: 259.98
-1582.	        status:
-1583.	          type: string
-1584.	          description: Payment status
-1585.	          example: "pending"
-1586.	
-1587.	    LoginResponse:
-1588.	      type: object
-1589.	      properties:
-1590.	        token:
-1591.	          type: string
-1592.	          description: JWT authentication token
-1593.	          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-1594.	
-1595.	    RegisterRequest:
-1596.	      type: object
-1597.	      required:
-1598.	        - role
-1599.	        - name
-1600.	        - email
-1601.	        - password
-1602.	      properties:
-1603.	        role:
-1604.	          type: string
-1605.	          description: User's role in the system
-1606.	          example: "user"
-1607.	        name:
-1608.	          type: string
-1609.	          description: User's full name
-1610.	          example: "John Doe"
-1611.	        email:
-1612.	          type: string
-1613.	          format: email
-1614.	          description: User's email address
-1615.	          example: "john@example.com"
-1616.	        password:
-1617.	          type: string
-1618.	          format: password
-1619.	          description: User's password (min 6 characters)
-1620.	          example: "password123"
-1621.	
-1622.	    LoginRequest:
-1623.	      type: object
-1624.	      required:
-1625.	        - email
-1626.	        - password
-1627.	      properties:
-1628.	        email:
-1629.	          type: string
-1630.	          format: email
-1631.	          description: User's email address
-1632.	          example: "john@example.com"
-1633.	        password:
-1634.	          type: string
-1635.	          format: password
-1636.	          description: User's password
-1637.	          example: "password123"
-1638.	
-1639.	    Error:
-1640.	      type: object
-1641.	      properties:
-1642.	        message:
-1643.	          type: string
-1644.	          description: Error message
-1645.	          example: "Resource not found"
-1646.	
-1647.	  securitySchemes:
-1648.	    bearerAuth:
-1649.	      type: http
-1650.	      scheme: bearer
-1651.	      bearerFormat: JWT
-1652.	
-1653.	servers:
-1654.	  - url: http://localhost:5000
+1 	{
+2 	    "info": {
+3 	        "_postman_id": "bb6c353e-5e64-4b11-a3f0-d6eb5a1357a2",
+4 	        "name": "OrderManagementSystem",
+5 	        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+6 	        "_exporter_id": "40359270"
+7 	    },
+8 	    "item": [
+9 	        {
+10 	            "name": "User",
+11 	            "item": [
+12 	                {
+13 	                    "name": "All Users for Admin",
+14 	                    "request": {
+15 	                        "auth": {
+16 	                            "type": "bearer",
+17 	                            "bearer": [
+18 	                                {
+19 	                                    "key": "token",
+20 	                                    "value": "{{AUTH_TOKEN}}",
+21 	                                    "type": "string"
+22 	                                }
+23 	                            ]
+24 	                        },
+25 	                        "method": "GET",
+26 	                        "header": [],
+27 	                        "url": {
+28 	                            "raw": "http://localhost:5000/api/users",
+29 	                            "protocol": "http",
+30 	                            "host": [
+31 	                                "localhost"
+32 	                            ],
+33 	                            "port": "5000",
+34 	                            "path": [
+35 	                                "api",
+36 	                                "users"
+37 	                            ]
+38 	                        }
+39 	                    },
+40 	                    "response": []
+41 	                },
+42 	                {
+43 	                    "name": "User By Id for Admin",
+44 	                    "request": {
+45 	                        "auth": {
+46 	                            "type": "bearer",
+47 	                            "bearer": [
+48 	                                {
+49 	                                    "key": "token",
+50 	                                    "value": "{{AUTH_TOKEN}}",
+51 	                                    "type": "string"
+52 	                                }
+53 	                            ]
+54 	                        },
+55 	                        "method": "GET",
+56 	                        "header": [],
+57 	                        "url": {
+58 	                            "raw": "http://localhost:5000/api/users/67657e81237a56d2487b8367",
+59 	                            "protocol": "http",
+60 	                            "host": [
+61 	                                "localhost"
+62 	                            ],
+63 	                            "port": "5000",
+64 	                            "path": [
+65 	                                "api",
+66 	                                "users",
+67 	                                "67657e81237a56d2487b8367"
+68 	                            ]
+69 	                        }
+70 	                    },
+71 	                    "response": []
+72 	                },
+73 	                {
+74 	                    "name": "My account",
+75 	                    "request": {
+76 	                        "auth": {
+77 	                            "type": "bearer",
+78 	                            "bearer": [
+79 	                                {
+80 	                                    "key": "token",
+81 	                                    "value": "{{AUTH_TOKEN}}",
+82 	                                    "type": "string"
+83 	                                }
+84 	                            ]
+85 	                        },
+86 	                        "method": "DELETE",
+87 	                        "header": [],
+88 	                        "url": {
+89 	                            "raw": "http://localhost:5000/api/users/my-account",
+90 	                            "protocol": "http",
+91 	                            "host": [
+92 	                                "localhost"
+93 	                            ],
+94 	                            "port": "5000",
+95 	                            "path": [
+96 	                                "api",
+97 	                                "users",
+98 	                                "my-account"
+99 	                            ]
+100 	                        }
+101 	                    },
+102 	                    "response": []
+103 	                },
+104 	                {
+105 	                    "name": "by Admin",
+106 	                    "request": {
+107 	                        "auth": {
+108 	                            "type": "bearer",
+109 	                            "bearer": [
+110 	                                {
+111 	                                    "key": "token",
+112 	                                    "value": "{{AUTH_TOKEN}}",
+113 	                                    "type": "string"
+114 	                                }
+115 	                            ]
+116 	                        },
+117 	                        "method": "DELETE",
+118 	                        "header": [],
+119 	                        "url": {
+120 	                            "raw": "http://localhost:5000/api/users/admin/675c4d5021b692c91160b6be",
+121 	                            "protocol": "http",
+122 	                            "host": [
+123 	                                "localhost"
+124 	                            ],
+125 	                            "port": "5000",
+126 	                            "path": [
+127 	                                "api",
+128 	                                "users",
+129 	                                "admin",
+130 	                                "675c4d5021b692c91160b6be"
+131 	                            ]
+132 	                        }
+133 	                    },
+134 	                    "response": []
+135 	                },
+136 	                {
+137 	                    "name": "User",
+138 	                    "request": {
+139 	                        "auth": {
+140 	                            "type": "bearer",
+141 	                            "bearer": [
+142 	                                {
+143 	                                    "key": "token",
+144 	                                    "value": "{{AUTH_TOKEN}}",
+145 	                                    "type": "string"
+146 	                                }
+147 	                            ]
+148 	                        },
+149 	                        "method": "PUT",
+150 	                        "header": [],
+151 	                        "body": {
+152 	                            "mode": "raw",
+153 	                            "raw": "{\r\n     \"role\": \"admin\"\r\n}",
+154 	                            "options": {
+155 	                                "raw": {
+156 	                                    "language": "json"
+157 	                                }
+158 	                            }
+159 	                        },
+160 	                        "url": {
+161 	                            "raw": "http://localhost:5000/api/users/675b02bd3a8e4a60ceca2c67",
+162 	                            "protocol": "http",
+163 	                            "host": [
+164 	                                "localhost"
+165 	                            ],
+166 	                            "port": "5000",
+167 	                            "path": [
+168 	                                "api",
+169 	                                "users",
+170 	                                "675b02bd3a8e4a60ceca2c67"
+171 	                            ]
+172 	                        }
+173 	                    },
+174 	                    "response": []
+175 	                },
+176 	                {
+177 	                    "name": "Request to Reset Password",
+178 	                    "request": {
+179 	                        "auth": {
+180 	                            "type": "bearer",
+181 	                            "bearer": [
+182 	                                {
+183 	                                    "key": "token",
+184 	                                    "value": "{{AUTH_TOKEN}}",
+185 	                                    "type": "string"
+186 	                                }
+187 	                            ]
+188 	                        },
+189 	                        "method": "POST",
+190 	                        "header": [],
+191 	                        "body": {
+192 	                            "mode": "raw",
+193 	                            "raw": "{\r\n    \"email\": \"oleksandra.atamanova@nure.ua\"\r\n}",
+194 	                            "options": {
+195 	                                "raw": {
+196 	                                    "language": "json"
+197 	                                }
+198 	                            }
+199 	                        },
+200 	                        "url": {
+201 	                            "raw": "http://localhost:5000/api/users/forgot-password",
+202 	                            "protocol": "http",
+203 	                            "host": [
+204 	                                "localhost"
+205 	                            ],
+206 	                            "port": "5000",
+207 	                            "path": [
+208 	                                "api",
+209 	                                "users",
+210 	                                "forgot-password"
+211 	                            ]
+212 	                        }
+213 	                    },
+214 	                    "response": []
+215 	                },
+216 	                {
+217 	                    "name": "Update Password",
+218 	                    "request": {
+219 	                        "auth": {
+220 	                            "type": "bearer",
+221 	                            "bearer": [
+222 	                                {
+223 	                                    "key": "token",
+224 	                                    "value": "{{AUTH_TOKEN}}",
+225 	                                    "type": "string"
+226 	                                }
+227 	                            ]
+228 	                        },
+229 	                        "method": "PUT",
+230 	                        "header": [],
+231 	                        "body": {
+232 	                            "mode": "raw",
+233 	                            "raw": "{\r\n    \"email\": \"oleksandra.atamanova@nure.ua\",\r\n    \"name\": \"Oleksandra Atamanova\",\r\n    \"newPassword\": \"3128bc8ddefdb374\"\r\n}",
+234 	                            "options": {
+235 	                                "raw": {
+236 	                                    "language": "json"
+237 	                                }
+238 	                            }
+239 	                        },
+240 	                        "url": {
+241 	                            "raw": "http://localhost:5000/api/users/update-profile",
+242 	                            "protocol": "http",
+243 	                            "host": [
+244 	                                "localhost"
+245 	                            ],
+246 	                            "port": "5000",
+247 	                            "path": [
+248 	                                "api",
+249 	                                "users",
+250 	                                "update-profile"
+251 	                            ]
+252 	                        }
+253 	                    },
+254 	                    "response": []
+255 	                }
+256 	            ]
+257 	        },
+258 	        {
+259 	            "name": "Product",
+260 	            "item": [
+261 	                {
+262 	                    "name": "Products",
+263 	                    "request": {
+264 	                        "auth": {
+265 	                            "type": "bearer",
+266 	                            "bearer": [
+267 	                                {
+268 	                                    "key": "token",
+269 	                                    "value": "{{AUTH_TOKEN}}",
+270 	                                    "type": "string"
+271 	                                }
+272 	                            ]
+273 	                        },
+274 	                        "method": "GET",
+275 	                        "header": [],
+276 	                        "url": {
+277 	                            "raw": "http://localhost:5000/api/products",
+278 	                            "protocol": "http",
+279 	                            "host": [
+280 	                                "localhost"
+281 	                            ],
+282 	                            "port": "5000",
+283 	                            "path": [
+284 	                                "api",
+285 	                                "products"
+286 	                            ]
+287 	                        }
+288 	                    },
+289 	                    "response": []
+290 	                },
+291 	                {
+292 	                    "name": "Product By Id",
+293 	                    "request": {
+294 	                        "method": "GET",
+295 	                        "header": [],
+296 	                        "url": {
+297 	                            "raw": "http://localhost:5000/api/products/675974e10eb9dbd00ef3784a",
+298 	                            "protocol": "http",
+299 	                            "host": [
+300 	                                "localhost"
+301 	                            ],
+302 	                            "port": "5000",
+303 	                            "path": [
+304 	                                "api",
+305 	                                "products",
+306 	                                "675974e10eb9dbd00ef3784a"
+307 	                            ]
+308 	                        }
+309 	                    },
+310 	                    "response": []
+311 	                },
+312 	                {
+313 	                    "name": "Products By Brand",
+314 	                    "request": {
+315 	                        "method": "GET",
+316 	                        "header": [],
+317 	                        "url": {
+318 	                            "raw": "http://localhost:5000/api/products/brand/Govee",
+319 	                            "protocol": "http",
+320 	                            "host": [
+321 	                                "localhost"
+322 	                            ],
+323 	                            "port": "5000",
+324 	                            "path": [
+325 	                                "api",
+326 	                                "products",
+327 	                                "brand",
+328 	                                "Govee"
+329 	                            ]
+330 	                        }
+331 	                    },
+332 	                    "response": []
+333 	                },
+334 	                {
+335 	                    "name": "Products By Size",
+336 	                    "request": {
+337 	                        "method": "GET",
+338 	                        "header": [],
+339 	                        "url": {
+340 	                            "raw": "http://localhost:5000/api/products/size/5",
+341 	                            "protocol": "http",
+342 	                            "host": [
+343 	                                "localhost"
+344 	                            ],
+345 	                            "port": "5000",
+346 	                            "path": [
+347 	                                "api",
+348 	                                "products",
+349 	                                "size",
+350 	                                "5"
+351 	                            ]
+352 	                        }
+353 	                    },
+354 	                    "response": []
+355 	                },
+356 	                {
+357 	                    "name": "Products By Type",
+358 	                    "request": {
+359 	                        "method": "GET",
+360 	                        "header": [],
+361 	                        "url": {
+362 	                            "raw": "http://localhost:5000/api/products/type/Lamp",
+363 	                            "protocol": "http",
+364 	                            "host": [
+365 	                                "localhost"
+366 	                            ],
+367 	                            "port": "5000",
+368 	                            "path": [
+369 	                                "api",
+370 	                                "products",
+371 	                                "type",
+372 	                                "Lamp"
+373 	                            ]
+374 	                        }
+375 	                    },
+376 	                    "response": []
+377 	                },
+378 	                {
+379 	                    "name": "Products By Price",
+380 	                    "request": {
+381 	                        "method": "GET",
+382 	                        "header": [],
+383 	                        "url": {
+384 	                            "raw": "http://localhost:5000/api/products/price/15/25",
+385 	                            "protocol": "http",
+386 	                            "host": [
+387 	                                "localhost"
+388 	                            ],
+389 	                            "port": "5000",
+390 	                            "path": [
+391 	                                "api",
+392 	                                "products",
+393 	                                "price",
+394 	                                "15",
+395 	                                "25"
+396 	                            ]
+397 	                        }
+398 	                    },
+399 	                    "response": []
+400 	                },
+401 	                {
+402 	                    "name": "Products By Quantity",
+403 	                    "request": {
+404 	                        "method": "GET",
+405 	                        "header": [],
+406 	                        "url": {
+407 	                            "raw": "http://localhost:5000/api/products/quantity/5/100",
+408 	                            "protocol": "http",
+409 	                            "host": [
+410 	                                "localhost"
+411 	                            ],
+412 	                            "port": "5000",
+413 	                            "path": [
+414 	                                "api",
+415 	                                "products",
+416 	                                "quantity",
+417 	                                "5",
+418 	                                "100"
+419 	                            ]
+420 	                        }
+421 	                    },
+422 	                    "response": []
+423 	                },
+424 	                {
+425 	                    "name": "Product by Admin",
+426 	                    "request": {
+427 	                        "auth": {
+428 	                            "type": "bearer",
+429 	                            "bearer": [
+430 	                                {
+431 	                                    "key": "token",
+432 	                                    "value": "{{AUTH_TOKEN}}",
+433 	                                    "type": "string"
+434 	                                }
+435 	                            ]
+436 	                        },
+437 	                        "method": "POST",
+438 	                        "header": [],
+439 	                        "body": {
+440 	                            "mode": "raw",
+441 	                            "raw": "{\r\n  \"name\": \"TESTPRODUCT\",\r\n  \"description\": \"description3\",\r\n  \"brand\": \"brand3\",\r\n  \"size\": \"3\",\r\n  \"type\": \"Type3\",\r\n  \"price\": 30,\r\n  \"quantity\": 15\r\n}",
+442 	                            "options": {
+443 	                                "raw": {
+444 	                                    "language": "json"
+445 	                                }
+446 	                            }
+447 	                        },
+448 	                        "url": {
+449 	                            "raw": "http://localhost:5000/api/products",
+450 	                            "protocol": "http",
+451 	                            "host": [
+452 	                                "localhost"
+453 	                            ],
+454 	                            "port": "5000",
+455 	                            "path": [
+456 	                                "api",
+457 	                                "products"
+458 	                            ]
+459 	                        }
+460 	                    },
+461 	                    "response": []
+462 	                },
+463 	                {
+464 	                    "name": "Product ny Admin",
+465 	                    "request": {
+466 	                        "auth": {
+467 	                            "type": "bearer",
+468 	                            "bearer": [
+469 	                                {
+470 	                                    "key": "token",
+471 	                                    "value": "{{AUTH_TOKEN}}",
+472 	                                    "type": "string"
+473 	                                }
+474 	                            ]
+475 	                        },
+476 	                        "method": "DELETE",
+477 	                        "header": [],
+478 	                        "url": {
+479 	                            "raw": "http://localhost:5000/api/products/67699fdb3cc825a0206c5ef7",
+480 	                            "protocol": "http",
+481 	                            "host": [
+482 	                                "localhost"
+483 	                            ],
+484 	                            "port": "5000",
+485 	                            "path": [
+486 	                                "api",
+487 	                                "products",
+488 	                                "67699fdb3cc825a0206c5ef7"
+489 	                            ]
+490 	                        }
+491 	                    },
+492 	                    "response": []
+493 	                },
+494 	                {
+495 	                    "name": "Product by Admin",
+496 	                    "request": {
+497 	                        "auth": {
+498 	                            "type": "bearer",
+499 	                            "bearer": [
+500 	                                {
+501 	                                    "key": "token",
+502 	                                    "value": "{{AUTH_TOKEN}}",
+503 	                                    "type": "string"
+504 	                                }
+505 	                            ]
+506 	                        },
+507 	                        "method": "PUT",
+508 	                        "header": [],
+509 	                        "body": {
+510 	                            "mode": "raw",
+511 	                            "raw": "{\r\n    \"name\": \"LED Lamp Gove\",\r\n    \"brand\": \"Govee\"\r\n}",
+512 	                            "options": {
+513 	                                "raw": {
+514 	                                    "language": "json"
+515 	                                }
+516 	                            }
+517 	                        },
+518 	                        "url": {
+519 	                            "raw": "http://localhost:5000/api/products/67699fdb3cc825a0206c5ef7",
+520 	                            "protocol": "http",
+521 	                            "host": [
+522 	                                "localhost"
+523 	                            ],
+524 	                            "port": "5000",
+525 	                            "path": [
+526 	                                "api",
+527 	                                "products",
+528 	                                "67699fdb3cc825a0206c5ef7"
+529 	                            ]
+530 	                        }
+531 	                    },
+532 	                    "response": []
+533 	                }
+534 	            ]
+535 	        },
+536 	        {
+537 	            "name": "Payment",
+538 	            "item": [
+539 	                {
+540 	                    "name": "All Payments for Admin",
+541 	                    "request": {
+542 	                        "auth": {
+543 	                            "type": "bearer",
+544 	                            "bearer": [
+545 	                                {
+546 	                                    "key": "token",
+547 	                                    "value": "{{AUTH_TOKEN}}",
+548 	                                    "type": "string"
+549 	                                }
+550 	                            ]
+551 	                        },
+552 	                        "method": "GET",
+553 	                        "header": [],
+554 	                        "url": {
+555 	                            "raw": "http://localhost:5000/api/payments",
+556 	                            "protocol": "http",
+557 	                            "host": [
+558 	                                "localhost"
+559 	                            ],
+560 	                            "port": "5000",
+561 	                            "path": [
+562 	                                "api",
+563 	                                "payments"
+564 	                            ]
+565 	                        }
+566 	                    },
+567 	                    "response": []
+568 	                },
+569 	                {
+570 	                    "name": "My payments",
+571 	                    "request": {
+572 	                        "auth": {
+573 	                            "type": "bearer",
+574 	                            "bearer": [
+575 	                                {
+576 	                                    "key": "token",
+577 	                                    "value": "{{AUTH_TOKEN}}",
+578 	                                    "type": "string"
+579 	                                }
+580 	                            ]
+581 	                        },
+582 	                        "method": "GET",
+583 	                        "header": [],
+584 	                        "url": {
+585 	                            "raw": "http://localhost:5000/api/payments/my-payments",
+586 	                            "protocol": "http",
+587 	                            "host": [
+588 	                                "localhost"
+589 	                            ],
+590 	                            "port": "5000",
+591 	                            "path": [
+592 	                                "api",
+593 	                                "payments",
+594 	                                "my-payments"
+595 	                            ]
+596 	                        }
+597 	                    },
+598 	                    "response": []
+599 	                },
+600 	                {
+601 	                    "name": "Payment By Order",
+602 	                    "request": {
+603 	                        "auth": {
+604 	                            "type": "bearer",
+605 	                            "bearer": [
+606 	                                {
+607 	                                    "key": "token",
+608 	                                    "value": "{{AUTH_TOKEN}}",
+609 	                                    "type": "string"
+610 	                                }
+611 	                            ]
+612 	                        },
+613 	                        "method": "GET",
+614 	                        "header": [],
+615 	                        "url": {
+616 	                            "raw": "http://localhost:5000/api/payments/order/675c0bec19193f76a59aa804",
+617 	                            "protocol": "http",
+618 	                            "host": [
+619 	                                "localhost"
+620 	                            ],
+621 	                            "port": "5000",
+622 	                            "path": [
+623 	                                "api",
+624 	                                "payments",
+625 	                                "order",
+626 	                                "675c0bec19193f76a59aa804"
+627 	                            ]
+628 	                        }
+629 	                    },
+630 	                    "response": []
+631 	                },
+632 	                {
+633 	                    "name": "Payment By User",
+634 	                    "request": {
+635 	                        "auth": {
+636 	                            "type": "bearer",
+637 	                            "bearer": [
+638 	                                {
+639 	                                    "key": "token",
+640 	                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NjZkMDQ3OGVhYzQ4OWZhNTY3YjVkZiIsImlhdCI6MTczNDk3NDg1MiwiZXhwIjoxNzM1MDYxMjUyfQ.YrjMuh_hpWM2MJFl4CXhpNzgukIo47ixlWgon7o3fSc",
+641 	                                    "type": "string"
+642 	                                }
+643 	                            ]
+644 	                        },
+645 	                        "method": "GET",
+646 	                        "header": [],
+647 	                        "url": {
+648 	                            "raw": "http://localhost:5000/api/payments/user/675bff6c19193f76a59aa7dd",
+649 	                            "protocol": "http",
+650 	                            "host": [
+651 	                                "localhost"
+652 	                            ],
+653 	                            "port": "5000",
+654 	                            "path": [
+655 	                                "api",
+656 	                                "payments",
+657 	                                "user",
+658 	                                "675bff6c19193f76a59aa7dd"
+659 	                            ]
+660 	                        }
+661 	                    },
+662 	                    "response": []
+663 	                },
+664 	                {
+665 	                    "name": "Payment By Status",
+666 	                    "request": {
+667 	                        "auth": {
+668 	                            "type": "bearer",
+669 	                            "bearer": [
+670 	                                {
+671 	                                    "key": "token",
+672 	                                    "value": "{{AUTH_TOKEN}}",
+673 	                                    "type": "string"
+674 	                                }
+675 	                            ]
+676 	                        },
+677 	                        "method": "GET",
+678 	                        "header": [],
+679 	                        "url": {
+680 	                            "raw": "http://localhost:5000/api/payments/status/failed",
+681 	                            "protocol": "http",
+682 	                            "host": [
+683 	                                "localhost"
+684 	                            ],
+685 	                            "port": "5000",
+686 	                            "path": [
+687 	                                "api",
+688 	                                "payments",
+689 	                                "status",
+690 	                                "failed"
+691 	                            ]
+692 	                        }
+693 	                    },
+694 	                    "response": []
+695 	                },
+696 	                {
+697 	                    "name": "Payment",
+698 	                    "request": {
+699 	                        "auth": {
+700 	                            "type": "bearer",
+701 	                            "bearer": [
+702 	                                {
+703 	                                    "key": "token",
+704 	                                    "value": "{{AUTH_TOKEN}}",
+705 	                                    "type": "string"
+706 	                                }
+707 	                            ]
+708 	                        },
+709 	                        "method": "POST",
+710 	                        "header": [],
+711 	                        "body": {
+712 	                            "mode": "raw",
+713 	                            "raw": "{\r\n  \"order_id\": \"675c0bec19193f76a59aa804\",\r\n  \"user_id\": \"67657e81237a56d2487b8367\",\r\n  \"product_id\": \"675974e10eb9dbd00ef3784a\",\r\n  \"amount\": -15000.00,\r\n  \"status\": \"completed\"\r\n}",
+714 	                            "options": {
+715 	                                "raw": {
+716 	                                    "language": "json"
+717 	                                }
+718 	                            }
+719 	                        },
+720 	                        "url": {
+721 	                            "raw": "http://localhost:5000/api/payments",
+722 	                            "protocol": "http",
+723 	                            "host": [
+724 	                                "localhost"
+725 	                            ],
+726 	                            "port": "5000",
+727 	                            "path": [
+728 	                                "api",
+729 	                                "payments"
+730 	                            ]
+731 	                        }
+732 	                    },
+733 	                    "response": []
+734 	                },
+735 	                {
+736 	                    "name": "Payment",
+737 	                    "request": {
+738 	                        "auth": {
+739 	                            "type": "bearer",
+740 	                            "bearer": [
+741 	                                {
+742 	                                    "key": "token",
+743 	                                    "value": "{{AUTH_TOKEN}}",
+744 	                                    "type": "string"
+745 	                                }
+746 	                            ]
+747 	                        },
+748 	                        "method": "DELETE",
+749 	                        "header": [],
+750 	                        "body": {
+751 	                            "mode": "raw",
+752 	                            "raw": "",
+753 	                            "options": {
+754 	                                "raw": {
+755 	                                    "language": "json"
+756 	                                }
+757 	                            }
+758 	                        },
+759 	                        "url": {
+760 	                            "raw": "http://localhost:5000/api/payments/676583e9d6bdea181044d1bd",
+761 	                            "protocol": "http",
+762 	                            "host": [
+763 	                                "localhost"
+764 	                            ],
+765 	                            "port": "5000",
+766 	                            "path": [
+767 	                                "api",
+768 	                                "payments",
+769 	                                "676583e9d6bdea181044d1bd"
+770 	                            ]
+771 	                        }
+772 	                    },
+773 	                    "response": []
+774 	                }
+775 	            ]
+776 	        },
+777 	        {
+778 	            "name": "Order",
+779 	            "item": [
+780 	                {
+781 	                    "name": "All Orders for Admin",
+782 	                    "request": {
+783 	                        "auth": {
+784 	                            "type": "bearer",
+785 	                            "bearer": [
+786 	                                {
+787 	                                    "key": "token",
+788 	                                    "value": "{{AUTH_TOKEN}}",
+789 	                                    "type": "string"
+790 	                                }
+791 	                            ]
+792 	                        },
+793 	                        "method": "GET",
+794 	                        "header": [],
+795 	                        "url": {
+796 	                            "raw": "http://localhost:5000/api/orders",
+797 	                            "protocol": "http",
+798 	                            "host": [
+799 	                                "localhost"
+800 	                            ],
+801 	                            "port": "5000",
+802 	                            "path": [
+803 	                                "api",
+804 	                                "orders"
+805 	                            ]
+806 	                        }
+807 	                    },
+808 	                    "response": []
+809 	                },
+810 	                {
+811 	                    "name": "My orders",
+812 	                    "request": {
+813 	                        "auth": {
+814 	                            "type": "bearer",
+815 	                            "bearer": [
+816 	                                {
+817 	                                    "key": "token",
+818 	                                    "value": "{{AUTH_TOKEN}}",
+819 	                                    "type": "string"
+820 	                                }
+821 	                            ]
+822 	                        },
+823 	                        "method": "GET",
+824 	                        "header": [],
+825 	                        "url": {
+826 	                            "raw": "http://localhost:5000/api/orders/my-orders",
+827 	                            "protocol": "http",
+828 	                            "host": [
+829 	                                "localhost"
+830 	                            ],
+831 	                            "port": "5000",
+832 	                            "path": [
+833 	                                "api",
+834 	                                "orders",
+835 	                                "my-orders"
+836 	                            ]
+837 	                        }
+838 	                    },
+839 	                    "response": []
+840 	                },
+841 	                {
+842 	                    "name": "Order By Id",
+843 	                    "request": {
+844 	                        "auth": {
+845 	                            "type": "bearer",
+846 	                            "bearer": [
+847 	                                {
+848 	                                    "key": "token",
+849 	                                    "value": "{{AUTH_TOKEN}}",
+850 	                                    "type": "string"
+851 	                                }
+852 	                            ]
+853 	                        },
+854 	                        "method": "GET",
+855 	                        "header": [],
+856 	                        "url": {
+857 	                            "raw": "http://localhost:5000/api/orders/675c0bec19193f76a59aa804",
+858 	                            "protocol": "http",
+859 	                            "host": [
+860 	                                "localhost"
+861 	                            ],
+862 	                            "port": "5000",
+863 	                            "path": [
+864 	                                "api",
+865 	                                "orders",
+866 	                                "675c0bec19193f76a59aa804"
+867 	                            ]
+868 	                        }
+869 	                    },
+870 	                    "response": []
+871 	                },
+872 	                {
+873 	                    "name": "Orders By User",
+874 	                    "request": {
+875 	                        "auth": {
+876 	                            "type": "bearer",
+877 	                            "bearer": [
+878 	                                {
+879 	                                    "key": "token",
+880 	                                    "value": "{{AUTH_TOKEN}}",
+881 	                                    "type": "string"
+882 	                                }
+883 	                            ]
+884 	                        },
+885 	                        "method": "GET",
+886 	                        "header": [],
+887 	                        "url": {
+888 	                            "raw": "http://localhost:5000/api/orders/user/675bff6c19193f76a59aa7dd",
+889 	                            "protocol": "http",
+890 	                            "host": [
+891 	                                "localhost"
+892 	                            ],
+893 	                            "port": "5000",
+894 	                            "path": [
+895 	                                "api",
+896 	                                "orders",
+897 	                                "user",
+898 	                                "675bff6c19193f76a59aa7dd"
+899 	                            ]
+900 	                        }
+901 	                    },
+902 	                    "response": []
+903 	                },
+904 	                {
+905 	                    "name": "Orders By Status",
+906 	                    "request": {
+907 	                        "auth": {
+908 	                            "type": "bearer",
+909 	                            "bearer": [
+910 	                                {
+911 	                                    "key": "token",
+912 	                                    "value": "{{AUTH_TOKEN}}",
+913 	                                    "type": "string"
+914 	                                }
+915 	                            ]
+916 	                        },
+917 	                        "method": "GET",
+918 	                        "header": [],
+919 	                        "url": {
+920 	                            "raw": "http://localhost:5000/api/orders/status/processing",
+921 	                            "protocol": "http",
+922 	                            "host": [
+923 	                                "localhost"
+924 	                            ],
+925 	                            "port": "5000",
+926 	                            "path": [
+927 	                                "api",
+928 	                                "orders",
+929 	                                "status",
+930 	                                "processing"
+931 	                            ]
+932 	                        }
+933 	                    },
+934 	                    "response": []
+935 	                },
+936 	                {
+937 	                    "name": "Orders By Date",
+938 	                    "request": {
+939 	                        "auth": {
+940 	                            "type": "bearer",
+941 	                            "bearer": [
+942 	                                {
+943 	                                    "key": "token",
+944 	                                    "value": "{{AUTH_TOKEN}}",
+945 	                                    "type": "string"
+946 	                                }
+947 	                            ]
+948 	                        },
+949 	                        "method": "GET",
+950 	                        "header": [],
+951 	                        "url": {
+952 	                            "raw": "http://localhost:5000/api/orders/date/2024-12-10/2024-12-14",
+953 	                            "protocol": "http",
+954 	                            "host": [
+955 	                                "localhost"
+956 	                            ],
+957 	                            "port": "5000",
+958 	                            "path": [
+959 	                                "api",
+960 	                                "orders",
+961 	                                "date",
+962 	                                "2024-12-10",
+963 	                                "2024-12-14"
+964 	                            ]
+965 	                        }
+966 	                    },
+967 	                    "response": []
+968 	                },
+969 	                {
+970 	                    "name": "Order",
+971 	                    "request": {
+972 	                        "auth": {
+973 	                            "type": "bearer",
+974 	                            "bearer": [
+975 	                                {
+976 	                                    "key": "token",
+977 	                                    "value": "{{AUTH_TOKEN}}",
+978 	                                    "type": "string"
+979 	                                }
+980 	                            ]
+981 	                        },
+982 	                        "method": "POST",
+983 	                        "header": [],
+984 	                        "body": {
+985 	                            "mode": "raw",
+986 	                            "raw": "{\r\n  \"user_id\": \"67657e81237a56d2487b8367\",\r\n  \"total_price\": 15.00,\r\n  \"status\": \"ready\"\r\n}",
+987 	                            "options": {
+988 	                                "raw": {
+989 	                                    "language": "json"
+990 	                                }
+991 	                            }
+992 	                        },
+993 	                        "url": {
+994 	                            "raw": "http://localhost:5000/api/orders",
+995 	                            "protocol": "http",
+996 	                            "host": [
+997 	                                "localhost"
+998 	                            ],
+999 	                            "port": "5000",
+1000 	                            "path": [
+1001 	                                "api",
+1002 	                                "orders"
+1003 	                            ]
+1004 	                        }
+1005 	                    },
+1006 	                    "response": []
+1007 	                },
+1008 	                {
+1009 	                    "name": "Order for Admin",
+1010 	                    "request": {
+1011 	                        "auth": {
+1012 	                            "type": "bearer",
+1013 	                            "bearer": [
+1014 	                                {
+1015 	                                    "key": "token",
+1016 	                                    "value": "{{AUTH_TOKEN}}",
+1017 	                                    "type": "string"
+1018 	                                }
+1019 	                            ]
+1020 	                        },
+1021 	                        "method": "DELETE",
+1022 	                        "header": [],
+1023 	                        "url": {
+1024 	                            "raw": "http://localhost:5000/api/orders/67658676d6bdea181044d1e2",
+1025 	                            "protocol": "http",
+1026 	                            "host": [
+1027 	                                "localhost"
+1028 	                            ],
+1029 	                            "port": "5000",
+1030 	                            "path": [
+1031 	                                "api",
+1032 	                                "orders",
+1033 	                                "67658676d6bdea181044d1e2"
+1034 	                            ]
+1035 	                        }
+1036 	                    },
+1037 	                    "response": []
+1038 	                }
+1039 	            ]
+1040 	        },
+1041 	        {
+1042 	            "name": "OrderItem",
+1043 	            "item": [
+1044 	                {
+1045 	                    "name": "All OrderItems for Admin",
+1046 	                    "request": {
+1047 	                        "auth": {
+1048 	                            "type": "bearer",
+1049 	                            "bearer": [
+1050 	                                {
+1051 	                                    "key": "token",
+1052 	                                    "value": "{{AUTH_TOKEN}}",
+1053 	                                    "type": "string"
+1054 	                                }
+1055 	                            ]
+1056 	                        },
+1057 	                        "method": "GET",
+1058 	                        "header": [],
+1059 	                        "url": {
+1060 	                            "raw": "http://localhost:5000/api/orderitems",
+1061 	                            "protocol": "http",
+1062 	                            "host": [
+1063 	                                "localhost"
+1064 	                            ],
+1065 	                            "port": "5000",
+1066 	                            "path": [
+1067 	                                "api",
+1068 	                                "orderitems"
+1069 	                            ]
+1070 	                        }
+1071 	                    },
+1072 	                    "response": []
+1073 	                },
+1074 	                {
+1075 	                    "name": "My OrderItems",
+1076 	                    "request": {
+1077 	                        "auth": {
+1078 	                            "type": "bearer",
+1079 	                            "bearer": [
+1080 	                                {
+1081 	                                    "key": "token",
+1082 	                                    "value": "{{AUTH_TOKEN}}",
+1083 	                                    "type": "string"
+1084 	                                }
+1085 	                            ]
+1086 	                        },
+1087 	                        "method": "GET",
+1088 	                        "header": [],
+1089 	                        "url": {
+1090 	                            "raw": "http://localhost:5000/api/orderitems/my-order-items",
+1091 	                            "protocol": "http",
+1092 	                            "host": [
+1093 	                                "localhost"
+1094 	                            ],
+1095 	                            "port": "5000",
+1096 	                            "path": [
+1097 	                                "api",
+1098 	                                "orderitems",
+1099 	                                "my-order-items"
+1100 	                            ]
+1101 	                        }
+1102 	                    },
+1103 	                    "response": []
+1104 	                },
+1105 	                {
+1106 	                    "name": "OrderItem By Id",
+1107 	                    "request": {
+1108 	                        "auth": {
+1109 	                            "type": "bearer",
+1110 	                            "bearer": [
+1111 	                                {
+1112 	                                    "key": "token",
+1113 	                                    "value": "{{AUTH_TOKEN}}",
+1114 	                                    "type": "string"
+1115 	                                }
+1116 	                            ]
+1117 	                        },
+1118 	                        "method": "GET",
+1119 	                        "header": [],
+1120 	                        "url": {
+1121 	                            "raw": "http://localhost:5000/api/orderitems/order/675c0bec19193f76a59aa804",
+1122 	                            "protocol": "http",
+1123 	                            "host": [
+1124 	                                "localhost"
+1125 	                            ],
+1126 	                            "port": "5000",
+1127 	                            "path": [
+1128 	                                "api",
+1129 	                                "orderitems",
+1130 	                                "order",
+1131 	                                "675c0bec19193f76a59aa804"
+1132 	                            ]
+1133 	                        }
+1134 	                    },
+1135 	                    "response": []
+1136 	                },
+1137 	                {
+1138 	                    "name": "OrderItem by Product",
+1139 	                    "request": {
+1140 	                        "auth": {
+1141 	                            "type": "bearer",
+1142 	                            "bearer": [
+1143 	                                {
+1144 	                                    "key": "token",
+1145 	                                    "value": "{{AUTH_TOKEN}}",
+1146 	                                    "type": "string"
+1147 	                                }
+1148 	                            ]
+1149 	                        },
+1150 	                        "method": "GET",
+1151 	                        "header": [],
+1152 	                        "url": {
+1153 	                            "raw": "http://localhost:5000/api/orderitems/product/675974e10eb9dbd00ef3784a",
+1154 	                            "protocol": "http",
+1155 	                            "host": [
+1156 	                                "localhost"
+1157 	                            ],
+1158 	                            "port": "5000",
+1159 	                            "path": [
+1160 	                                "api",
+1161 	                                "orderitems",
+1162 	                                "product",
+1163 	                                "675974e10eb9dbd00ef3784a"
+1164 	                            ]
+1165 	                        }
+1166 	                    },
+1167 	                    "response": []
+1168 	                },
+1169 	                {
+1170 	                    "name": "OrderItem By Quantity",
+1171 	                    "request": {
+1172 	                        "auth": {
+1173 	                            "type": "bearer",
+1174 	                            "bearer": [
+1175 	                                {
+1176 	                                    "key": "token",
+1177 	                                    "value": "{{AUTH_TOKEN}}",
+1178 	                                    "type": "string"
+1179 	                                }
+1180 	                            ]
+1181 	                        },
+1182 	                        "method": "GET",
+1183 	                        "header": [],
+1184 	                        "url": {
+1185 	                            "raw": "http://localhost:5000/api/orderitems/quantity/1/5",
+1186 	                            "protocol": "http",
+1187 	                            "host": [
+1188 	                                "localhost"
+1189 	                            ],
+1190 	                            "port": "5000",
+1191 	                            "path": [
+1192 	                                "api",
+1193 	                                "orderitems",
+1194 	                                "quantity",
+1195 	                                "1",
+1196 	                                "5"
+1197 	                            ]
+1198 	                        }
+1199 	                    },
+1200 	                    "response": []
+1201 	                },
+1202 	                {
+1203 	                    "name": "OrderItem",
+1204 	                    "request": {
+1205 	                        "auth": {
+1206 	                            "type": "bearer",
+1207 	                            "bearer": [
+1208 	                                {
+1209 	                                    "key": "token",
+1210 	                                    "value": "{{AUTH_TOKEN}}",
+1211 	                                    "type": "string"
+1212 	                                }
+1213 	                            ]
+1214 	                        },
+1215 	                        "method": "POST",
+1216 	                        "header": [],
+1217 	                        "body": {
+1218 	                            "mode": "raw",
+1219 	                            "raw": "{\r\n  \"order_id\": \"675c0bec19193f76a59aa804\",\r\n  \"product_id\": \"675974e10eb9dbd00ef3784a\",\r\n  \"user_id\": \"67657e81237a56d2487b8367і\",\r\n  \"quantity\": 220,\r\n  \"price_per_item\": -50.00\r\n}",
+1220 	                            "options": {
+1221 	                                "raw": {
+1222 	                                    "language": "json"
+1223 	                                }
+1224 	                            }
+1225 	                        },
+1226 	                        "url": {
+1227 	                            "raw": "http://localhost:5000/api/orderitems",
+1228 	                            "protocol": "http",
+1229 	                            "host": [
+1230 	                                "localhost"
+1231 	                            ],
+1232 	                            "port": "5000",
+1233 	                            "path": [
+1234 	                                "api",
+1235 	                                "orderitems"
+1236 	                            ]
+1237 	                        }
+1238 	                    },
+1239 	                    "response": []
+1240 	                },
+1241 	                {
+1242 	                    "name": "OrderItem for Admin",
+1243 	                    "request": {
+1244 	                        "auth": {
+1245 	                            "type": "bearer",
+1246 	                            "bearer": [
+1247 	                                {
+1248 	                                    "key": "token",
+1249 	                                    "value": "{{AUTH_TOKEN}}",
+1250 	                                    "type": "string"
+1251 	                                }
+1252 	                            ]
+1253 	                        },
+1254 	                        "method": "DELETE",
+1255 	                        "header": [],
+1256 	                        "url": {
+1257 	                            "raw": "http://localhost:5000/api/orderitems/676587c1588c6a14c3f32500",
+1258 	                            "protocol": "http",
+1259 	                            "host": [
+1260 	                                "localhost"
+1261 	                            ],
+1262 	                            "port": "5000",
+1263 	                            "path": [
+1264 	                                "api",
+1265 	                                "orderitems",
+1266 	                                "676587c1588c6a14c3f32500"
+1267 	                            ]
+1268 	                        }
+1269 	                    },
+1270 	                    "response": []
+1271 	                },
+1272 	                {
+1273 	                    "name": "Popular Product By Orders",
+1274 	                    "request": {
+1275 	                        "auth": {
+1276 	                            "type": "bearer",
+1277 	                            "bearer": [
+1278 	                                {
+1279 	                                    "key": "token",
+1280 	                                    "value": "{{AUTH_TOKEN}}",
+1281 	                                    "type": "string"
+1282 	                                }
+1283 	                            ]
+1284 	                        },
+1285 	                        "method": "GET",
+1286 	                        "header": [],
+1287 	                        "url": {
+1288 	                            "raw": "http://localhost:5000/api/orderitems/popular/2024-12-10/2024-12-15",
+1289 	                            "protocol": "http",
+1290 	                            "host": [
+1291 	                                "localhost"
+1292 	                            ],
+1293 	                            "port": "5000",
+1294 	                            "path": [
+1295 	                                "api",
+1296 	                                "orderitems",
+1297 	                                "popular",
+1298 	                                "2024-12-10",
+1299 	                                "2024-12-15"
+1300 	                            ]
+1301 	                        }
+1302 	                    },
+1303 	                    "response": []
+1304 	                }
+1305 	            ]
+1306 	        },
+1307 	        {
+1308 	            "name": "Auth",
+1309 	            "item": [
+1310 	                {
+1311 	                    "name": "Register",
+1312 	                    "request": {
+1313 	                        "method": "POST",
+1314 	                        "header": [],
+1315 	                        "body": {
+1316 	                            "mode": "raw",
+1317 	                            "raw": "{\r\n    \"role\": \"user\",\r\n    \"name\": \"testResAccount\",\r\n    \"email\": \"try@resemail.com\",\r\n    \"password\": \"testpassword\"\r\n}",
+1318 	                            "options": {
+1319 	                                "raw": {
+1320 	                                    "language": "json"
+1321 	                                }
+1322 	                            }
+1323 	                        },
+1324 	                        "url": {
+1325 	                            "raw": "http://localhost:5000/api/auth/register",
+1326 	                            "protocol": "http",
+1327 	                            "host": [
+1328 	                                "localhost"
+1329 	                            ],
+1330 	                            "port": "5000",
+1331 	                            "path": [
+1332 	                                "api",
+1333 	                                "auth",
+1334 	                                "register"
+1335 	                            ]
+1336 	                        }
+1337 	                    },
+1338 	                    "response": []
+1339 	                },
+1340 	                {
+1341 	                    "name": "Login",
+1342 	                    "request": {
+1343 	                        "auth": {
+1344 	                            "type": "bearer",
+1345 	                            "bearer": [
+1346 	                                {
+1347 	                                    "key": "token",
+1348 	                                    "value": "{{AUTH_TOKEN}}",
+1349 	                                    "type": "string"
+1350 	                                }
+1351 	                            ]
+1352 	                        },
+1353 	                        "method": "POST",
+1354 	                        "header": [],
+1355 	                        "body": {
+1356 	                            "mode": "raw",
+1357 	                            "raw": "{\r\n    \"email\": \"oleksandra.atamanova@nure.ua\",\r\n    \"password\": \"3128bc8ddefdb374\"\r\n}",
+1358 	                            "options": {
+1359 	                                "raw": {
+1360 	                                    "language": "json"
+1361 	                                }
+1362 	                            }
+1363 	                        },
+1364 	                        "url": {
+1365 	                            "raw": "http://localhost:5000/api/auth/login",
+1366 	                            "protocol": "http",
+1367 	                            "host": [
+1368 	                                "localhost"
+1369 	                            ],
+1370 	                            "port": "5000",
+1371 	                            "path": [
+1372 	                                "api",
+1373 	                                "auth",
+1374 	                                "login"
+1375 	                            ]
+1376 	                        }
+1377 	                    },
+1378 	                    "response": []
+1379 	                }
+1380 	            ]
+1381 	        },
+1382 	        {
+1383 	            "name": "iot",
+1384 	            "item": [
+1385 	                {
+1386 	                    "name": "Status",
+1387 	                    "request": {
+1388 	                        "auth": {
+1389 	                            "type": "bearer",
+1390 	                            "bearer": [
+1391 	                                {
+1392 	                                    "key": "token",
+1393 	                                    "value": "{{AUTH_TOKEN}}",
+1394 	                                    "type": "string"
+1395 	                                }
+1396 	                            ]
+1397 	                        },
+1398 	                        "method": "GET",
+1399 	                        "header": [],
+1400 	                        "url": {
+1401 	                            "raw": "http://localhost:5000/api/iot/status",
+1402 	                            "protocol": "http",
+1403 	                            "host": [
+1404 	                                "localhost"
+1405 	                            ],
+1406 	                            "port": "5000",
+1407 	                            "path": [
+1408 	                                "api",
+1409 	                                "iot",
+1410 	                                "status"
+1411 	                            ]
+1412 	                        }
+1413 	                    },
+1414 	                    "response": []
+1415 	                },
+1416 	                {
+1417 	                    "name": "Statistics",
+1418 	                    "request": {
+1419 	                        "auth": {
+1420 	                            "type": "bearer",
+1421 	                            "bearer": [
+1422 	                                {
+1423 	                                    "key": "token",
+1424 	                                    "value": "{{AUTH_TOKEN}}",
+1425 	                                    "type": "string"
+1426 	                                }
+1427 	                            ]
+1428 	                        },
+1429 	                        "method": "GET",
+1430 	                        "header": [],
+1431 	                        "url": {
+1432 	                            "raw": "http://localhost:5000/api/iot/statistics",
+1433 	                            "protocol": "http",
+1434 	                            "host": [
+1435 	                                "localhost"
+1436 	                            ],
+1437 	                            "port": "5000",
+1438 	                            "path": [
+1439 	                                "api",
+1440 	                                "iot",
+1441 	                                "statistics"
+1442 	                            ]
+1443 	                        }
+1444 	                    },
+1445 	                    "response": []
+1446 	                }
+1447 	            ]
+1448 	        }
+1449 	    ],
+1450 	    "event": [
+1451 	        {
+1452 	            "listen": "prerequest",
+1453 	            "script": {
+1454 	                "type": "text/javascript",
+1455 	                "packages": {},
+1456 	                "exec": [
+1457 	                    "pm.sendRequest({\r",
+1458 	                    "    url: 'http://localhost:5000/api/auth/login',\r",
+1459 	                    "    method: 'POST',\r",
+1460 	                    "    header: {\r",
+1461 	                    "        'content-type': 'application/json; charset=utf-8'\r",
+1462 	                    "    },\r",
+1463 	                    "    body: {\r",
+1464 	                    "        mode: 'raw',\r",
+1465 	                    "        raw: JSON.stringify({ \"email\": \"admin@email.com\",\"password\": \"adminpassword\" })\r",
+1466 	                    "    }\r",
+1467 	                    "}, (err, res) => {\r",
+1468 	                    "    pm.variables.set(\"AUTH_TOKEN\", res?.json()?.token);\r",
+1469 	                    "})"
+1470 	                ]
+1471 	            }
+1472 	        },
+1473 	        {
+1474 	            "listen": "test",
+1475 	            "script": {
+1476 	                "type": "text/javascript",
+1477 	                "packages": {},
+1478 	                "exec": [
+1479 	                    ""
+1480 	                ]
+1481 	            }
+1482 	        }
+1483 	    ],
+1484 	    "variable": [
+1485 	        {
+1486 	            "key": "AUTH_TOKEN",
+1487 	            "value": "",
+1488 	            "type": "string"
+1489 	        }
+1490 	    ]
+1491 	}
  
 ДОДАТОК Д
 ПРОГРАМНИЙ КОД
 
-Приклад перевірки токена авторизації
+Д.1 Приклад перевірки токена авторизації
 
-1.	const authenticateToken = (req, res, next) => {
-2.	    const token = req.header('Authorization')?.split(' ')[1];
-3.	
-4.	    if (!token) return res.status(401).json({ error: 'Access denied' });
-5.	
-6.	    try {
-7.	        const verified = jwt.verify(token, process.env.JWT_SECRET);
-8.	        req.user = verified;
-9.	        next();
-10.	    } catch (err) {
-11.	        res.status(403).json({ error: 'Invalid token' });
-12.	    }
-13.	};
+1 	const authenticateToken = (req, res, next) => {
+2 	    const token = req.header('Authorization')?.split(' ')[1];
+3 	
+4 	    if (!token) return res.status(401).json({ error: 'Access denied' });
+5 	
+6 	    try {
+7 	        const verified = jwt.verify(token, process.env.JWT_SECRET);
+8 	        req.user = verified;
+9 	        next();
+10 	    } catch (err) {
+11 	        res.status(403).json({ error: 'Invalid token' });
+12 	    }
+13 	};
 
-Приклад валідації даних продукту 
+Д.2 Приклад валідації даних продукту 
 
-1.	const validateProduct = (req, res, next) => {
-2.	    const { name, description, brand, size, type, price, quantity } = req.body;
-3.	    if (!name) return res.status(400).json({ message: 'Name is required' });
-4.	    if (!description) return res.status(400).json({ message: 'Description is required' });
-5.	    if (!brand) return res.status(400).json({ message: 'Brand is required' });
-6.	    if (!size) return res.status(400).json({ message: 'Size is required' });
-7.	    if (!type) return res.status(400).json({ message: 'Type is required' });
-8.	    if (!price) return res.status(400).json({ message: 'Price is required' });
-9.	    if (!quantity) return res.status(400).json({ message: 'Quantity is required' });
-10.	    next();
-11.	}; 
+1 	const validateProduct = (req, res, next) => {
+2 	    const { name, description, brand, size, type, price, quantity } = req.body;
+3 	    if (!name) return res.status(400).json({ message: 'Name is required' });
+4 	    if (!description) return res.status(400).json({ message: 'Description is required' });
+5 	    if (!brand) return res.status(400).json({ message: 'Brand is required' });
+6 	    if (!size) return res.status(400).json({ message: 'Size is required' });
+7 	    if (!type) return res.status(400).json({ message: 'Type is required' });
+8 	    if (!price) return res.status(400).json({ message: 'Price is required' });
+9 	    if (!quantity) return res.status(400).json({ message: 'Quantity is required' });
+10 	    next();
+11 	}; 
 
-Приклад видалення користувача з бази даних 
+Д.3 Приклад видалення користувача з бази даних 
 
-1.	router.delete('/:id', async (req, res) => {
-2.	    try {
-3.	        const user = await User.findById(req.user.id);
-4.	        if (!user) return res.status(404).json({ message: 'User not found' });
-5.	
-6.	        await User.deleteOne({ _id: req.user.id });
-7.	        res.json({ message: 'User deleted' });
-8.	    } catch (error) {
-9.	        res.status(500).json({ message: error.message });
-10.	    }
-11.	}); 
+1 	router.delete('/:id', async (req, res) => {
+2 	    try {
+3 	        const user = await User.findById(req.user.id);
+4 	        if (!user) return res.status(404).json({ message: 'User not found' });
+5 	
+6 	        await User.deleteOne({ _id: req.user.id });
+7 	        res.json({ message: 'User deleted' });
+8 	    } catch (error) {
+9 	        res.status(500).json({ message: error.message });
+10 	    }
+11 	});
 
-Приклад реєстрації та авторизації користувача
+Д.4 Приклад реєстрації та авторизації користувача
 
-1.	router.post('/register', validateRegister, async (req, res) => {
-2.	    const { role, name, email, password } = req.body;
-3.	    const hashedPassword = await bcrypt.hash(password, 10);
-4.	    const user = new User({ role, name, email, password: hashedPassword });
-5.	
-6.	    try {
-7.	        const savedUser = await user.save();
-8.	        res.status(201).json(savedUser);
-9.	    } catch (error) {
-10.	        res.status(400).json({ message: error.message });
-11.	    }
-12.	});
-13.	
-14.	router.post('/login', validateLogin, async (req, res) => {
-15.	    const { email, password } = req.body;
-16.	
-17.	    try {
-18.	        const user = await User.findOne({ email });
-19.	        if (!user) return res.status(404).json({ message: 'User not found' });
-20.	
-21.	        const isMatch = await bcrypt.compare(password, user.password);
-22.	        if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
-23.	
-24.	        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-25.	        res.json({ token });
-26.	    } catch (error) {
-27.	        res.status(500).json({ message: error.message });
-28.	    }
-29.	});
+1 	router.post('/register', validateRegister, async (req, res) => {
+2 	    const { role, name, email, password } = req.body;
+3 	    const hashedPassword = await bcrypt.hash(password, 10);
+4 	    const user = new User({ role, name, email, password: hashedPassword });
+5 	
+6 	    try {
+7 	        const savedUser = await user.save();
+8 	        res.status(201).json(savedUser);
+9 	    } catch (error) {
+10 	        res.status(400).json({ message: error.message });
+11 	    }
+12 	});
+13 	
+14 	router.post('/login', validateLogin, async (req, res) => {
+15 	    const { email, password } = req.body;
+16 	
+17 	    try {
+18 	        const user = await User.findOne({ email });
+19 	        if (!user) return res.status(404).json({ message: 'User not found' });
+20 	
+21 	        const isMatch = await bcrypt.compare(password, user.password);
+22 	        if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
+23 	
+24 	        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+25 	        res.json({ token });
+26 	    } catch (error) {
+27 	        res.status(500).json({ message: error.message });
+28 	    }
+29 	});
  
 
 ДОДАТОК Е
