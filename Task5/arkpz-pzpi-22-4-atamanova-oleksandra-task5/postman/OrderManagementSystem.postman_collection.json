@@ -438,7 +438,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"TESTPRODUCT\",\r\n  \"description\": \"description3\",\r\n  \"brand\": \"brand3\",\r\n  \"size\": \"3\",\r\n  \"type\": \"Type3\",\r\n  \"price\": 30,\r\n  \"quantity\": 15\r\n}",
+							"raw": "{\r\n  \"name\": \"TestBackup\",\r\n  \"description\": \"description3\",\r\n  \"brand\": \"brand3\",\r\n  \"size\": \"3\",\r\n  \"type\": \"Type3\",\r\n  \"price\": 30,\r\n  \"quantity\": 15\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1439,6 +1439,153 @@
 								"api",
 								"iot",
 								"statistics"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Backups",
+			"item": [
+				{
+					"name": "Backup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AUTH_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/admin/backup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin",
+								"backup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Export",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AUTH_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/admin/export",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin",
+								"export"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Import",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AUTH_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"name\": \"Test LED Strip Import\",\r\n            \"description\": \"RGB LED Strip for testing\",\r\n            \"brand\": \"TestBrand\",\r\n            \"size\": \"5\",\r\n            \"type\": \"Strip\",\r\n            \"price\": 25.99,\r\n            \"quantity\": 50\r\n        },\r\n        {\r\n            \"name\": \"Test LED Lamp Import\",\r\n            \"description\": \"RGB LED Lamp for testing\",\r\n            \"brand\": \"TestBrand\",\r\n            \"size\": \"10\",\r\n            \"type\": \"Lamp\",\r\n            \"price\": 35.99,\r\n            \"quantity\": 30\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/admin/import",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin",
+								"import"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AUTH_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backupPath\": \"D:\\\\NURE\\\\PZPI-22-4\\\\Semestr 5\\\\Atark\\\\arkpz-pzpi-22-4-atamanova-oleksandra\\\\Task5\\\\arkpz-pzpi-22-4-atamanova-oleksandra-task5\\\\backend\\\\backups\\\\backup-2024-12-26T16-05-38-051Z.json\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/admin/restore",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"admin",
+								"restore"
 							]
 						}
 					},
