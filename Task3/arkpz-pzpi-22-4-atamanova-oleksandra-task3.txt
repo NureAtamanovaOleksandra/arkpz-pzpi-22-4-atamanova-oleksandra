@@ -4,13 +4,10 @@
 
 
 
-
-
 ЗВІТ
 до лабораторної роботи номер 3 з дисципліни
 "Аналіз та рефакторинг коду"
 на тему: "РОЗРОБКА БІЗНЕС-ЛОГІКИ ТА ФУНКЦІЙ АДМІНІСТРУВАННЯ СЕРВЕРНОЇ ЧАСТИНИ ПРОГРАМНОЇ СИСТЕМИ"
-
 
 
 
@@ -24,20 +21,19 @@
  
 
 
-
-
 Харків 2024
-МЕТА
+
+1 МЕТА
 
 Метою роботи є розробити бізнес логіку та функції адміністрування серверної частини програмної системи.
 
-ХІД РОБОТИ
+2 ХІД РОБОТИ
 
 Під час виконання лабораторної роботи було розроблено наступну бізнес-логіку (опис інженерних рішень):
-•	Інтеграція з Gmail API для надсилання листів, зокрема тимчасових паролів користувачам, які хочуть відновити доступ до своїх облікових записів;
-•	Застосування хешування паролів для їх безпечного зберігання в базі даних;
-•	Реалізація Middleware для управління сесіями, фіксації поточного авторизованого користувача та обмеження доступу до функцій платформи залежно від ролі;
-•	Впровадження адміністративної логіки, яка забезпечує доступ до окремих функцій виключно адміністратору.
+–	інтеграція з Gmail API для надсилання листів, зокрема тимчасових паролів користувачам, які хочуть відновити доступ до своїх облікових записів;
+–	застосування хешування паролів для їх безпечного зберігання в базі даних;
+–	реалізація Middleware для управління сесіями, фіксації поточного авторизованого користувача та обмеження доступу до функцій платформи залежно від ролі;
+–	впровадження адміністративної логіки, яка забезпечує доступ до окремих функцій виключно адміністратору.
 Додатково під час роботи було створено UML-діаграму діяльності для серверної частини (Додаток А) та UML-діаграму взаємодії (Додаток Б).
 
 ВИСНОВКИ
@@ -48,90 +44,90 @@
 ДОДАТОК А
 UML ДІАГРАМА ДІЯЛЬНОСТІ
  
-Рисунок А – UML діаграма діяльності
+Рисунок А.1 – UML діаграма діяльності
 
 ДОДАТОК Б 
 UML ДІАГРАМА ВЗАЄМОДІЇ
  
-Рисунок Б – UML діаграма взаємодії
+Рисунок Б.1 – UML діаграма взаємодії 
 
 ДОДАТОК В
 ФРАГМЕНТИ ПРОГРАМНОГО КОДУ
 
-Приклад перевірки ролі адміністратора:
-1.	const checkAdmin = async (req, res, next) => {
-2.	    try {
-3.	        const user = await User.findById(req.user.id);
-4.	        if (user.role !== 'admin') {
-5.	            return res.status(403).json({ message: 'Access denied. Admins only.' });
-6.	        }
-7.	        next();
-8.	    } catch (error) {
-9.	        res.status(500).json({ message: error.message });
-10.	    }
-11.	};
+B.1 Приклад перевірки ролі адміністратора:
+1	const checkAdmin = async (req, res, next) => {
+2	    try {
+3	        const user = await User.findById(req.user.id);
+4	        if (user.role !== 'admin') {
+5	            return res.status(403).json({ message: 'Access denied. Admins only.' });
+6	        }
+7	        next();
+8	    } catch (error) {
+9	        res.status(500).json({ message: error.message });
+10	    }
+11	};
 
-Приклад застосування цього Middleware:
-1.	router.get('/:id', checkAdmin, async (req, res) => {
-2.	    try {
-3.	        const user = await User.findById(req.params.id);
-4.	        if (!user) {
-5.	            return res.status(404).json({ message: 'User not found' });
-6.	        }
-7.	        res.json(user);
-8.	    } catch (error) {
-9.	        res.status(500).json({ message: error.message });
-10.	    }
-11.	});
-
-
-Фільтрація продуктів за ціновим діапазоном:
-1.	router.get('/price/:min/:max', async (req, res) => {
-2.	    try {
-3.	        const products = await Product.find({
-4.	            price: { $gte: req.params.min, $lte: req.params.max }
-5.	        });
-6.	        res.json(products);
-7.	    } catch (error) {
-8.	        res.status(500).json({ message: error.message });
-9.	    }
-10.	});
+B.2 Приклад застосування цього Middleware:
+1 	router.get('/:id', checkAdmin, async (req, res) => {
+2 	    try {
+3 	        const user = await User.findById(req.params.id);
+4 	        if (!user) {
+5 	            return res.status(404).json({ message: 'User not found' });
+6 	        }
+7 	        res.json(user);
+8 	    } catch (error) {
+9 	        res.status(500).json({ message: error.message });
+10 	    }
+11 	});
 
 
-Аналіз популярних продуктів за період:
-1.	router.get('/popular/:startDate/:endDate', async (req, res) => {
-2.	    try {
-3.	        const { startDate, endDate } = req.params;
-4.	        const orderItems = await OrderItem.aggregate([
-5.	            {
-6.	                $match: {
-7.	                    createdAt: { $gte: new Date(startDate), $lte: new Date(endDate) }
-8.	                }
-9.	            },
-10.	            {
-11.	                $group: {
-12.	                    _id: "$product_id",
-13.	                    totalQuantity: { $sum: "$quantity" }
-14.	                }
-15.	            },
-16.	            {
-17.	                $sort: { totalQuantity: -1 }
-18.	            },
-19.	            {
-20.	                $limit: 1
-21.	            }
-22.	        ]);
-23.	
-24.	        if (!orderItems.length) {
-25.	            return res.status(404).json({ message: 'No popular product found in this date range' });
-26.	        }
-27.	
-28.	        const popularProduct = await OrderItem.populate(orderItems, { path: '_id', model: 'Product' });
-29.	        res.json(popularProduct);
-30.	    } catch (error) {
-31.	        res.status(500).json({ message: error.message });
-32.	    }
-33.	});
+В.3 Фільтрація продуктів за ціновим діапазоном:
+1 	router.get('/price/:min/:max', async (req, res) => {
+2 	    try {
+3 	        const products = await Product.find({
+4 	            price: { $gte: req.params.min, $lte: req.params.max }
+5 	        });
+6 	        res.json(products);
+7 	    } catch (error) {
+8 	        res.status(500).json({ message: error.message });
+9 	    }
+10 	});
+
+
+В.4 Аналіз популярних продуктів за період:
+1 	router.get('/popular/:startDate/:endDate', async (req, res) => {
+2 	    try {
+3 	        const { startDate, endDate } = req.params;
+4 	        const orderItems = await OrderItem.aggregate([
+5 	            {
+6 	                $match: {
+7 	                    createdAt: { $gte: new Date(startDate), $lte: new Date(endDate) }
+8 	                }
+9 	            },
+10 	            {
+11 	                $group: {
+12 	                    _id: "$product_id",
+13 	                    totalQuantity: { $sum: "$quantity" }
+14 	                }
+15 	            },
+16 	            {
+17 	                $sort: { totalQuantity: -1 }
+18 	            },
+19 	            {
+20 	                $limit: 1
+21 	            }
+22 	        ]);
+23 	
+24 	        if (!orderItems.length) {
+25 	            return res.status(404).json({ message: 'No popular product found in this date range' });
+26 	        }
+27 	
+28 	        const popularProduct = await OrderItem.populate(orderItems, { path: '_id', model: 'Product' });
+29 	        res.json(popularProduct);
+30 	    } catch (error) {
+31 	        res.status(500).json({ message: error.message });
+32 	    }
+33 	});
 
 ДОДАТОК Г
 ВІДЕО НА ЮТУБ
