@@ -4,6 +4,7 @@ const OrderItem = require('../models/OrderItem');
 const authenticateToken = require('../middlewares/authenticateToken');
 const checkAdmin = require('../middlewares/checkAdmin');
 
+// Отримання елементів замовлень поточного користувача
 router.get('/my-order-items', authenticateToken, async (req, res) => {
     try {
         const orderItems = await OrderItem.find({ user_id: req.user.id }).populate(['order_id', 'product_id', 'user_id']);
@@ -16,6 +17,7 @@ router.get('/my-order-items', authenticateToken, async (req, res) => {
     }
 });
 
+// Отримання всіх елементів замовлень (тільки для адміністратора)
 router.get('/', checkAdmin, async (req, res) => {
     try {
         const orderItems = await OrderItem.find().populate(['order_id', 'product_id', 'user_id']);
@@ -25,6 +27,7 @@ router.get('/', checkAdmin, async (req, res) => {
     }
 });
 
+// Пошук елементів за ID замовлення
 router.get('/order/:orderId', async (req, res) => {
     try {
         const orderItems = await OrderItem.find({ order_id: req.params.orderId }).populate(['order_id', 'product_id', 'user_id']);
@@ -34,6 +37,7 @@ router.get('/order/:orderId', async (req, res) => {
     }
 });
 
+// Пошук елементів за ID продукту
 router.get('/product/:productId', async (req, res) => {
     try {
         const orderItems = await OrderItem.find({ product_id: req.params.productId }).populate(['order_id', 'product_id', 'user_id']);
@@ -43,6 +47,7 @@ router.get('/product/:productId', async (req, res) => {
     }
 });
 
+// Фільтрація елементів за кількістю
 router.get('/quantity/:min/:max', async (req, res) => {
     try {
         const orderItems = await OrderItem.find({
@@ -54,9 +59,11 @@ router.get('/quantity/:min/:max', async (req, res) => {
     }
 });
 
+// Визначення найпопулярнішого продукту за вказаний період
 router.get('/popular/:startDate/:endDate', async (req, res) => {
     try {
         const { startDate, endDate } = req.params;
+        // Агрегація для підрахунку загальної кількості кожного продукту
         const orderItems = await OrderItem.aggregate([
             {
                 $match: {
@@ -88,6 +95,7 @@ router.get('/popular/:startDate/:endDate', async (req, res) => {
     }
 });
 
+// Перевірка правильності даних елемента замовлення
 const validateOrderItem = (req, res, next) => {
     const { order_id, product_id, user_id, quantity, price_per_item } = req.body;
     if (!order_id) return res.status(400).json({ message: 'Order ID is required' });
@@ -98,6 +106,7 @@ const validateOrderItem = (req, res, next) => {
     next();
 };
 
+// Створення нового елемента замовлення
 router.post('/', validateOrderItem, async (req, res) => {
     const { order_id, product_id, user_id, quantity, price_per_item } = req.body;
     const orderItem = new OrderItem({ order_id, product_id, user_id, quantity, price_per_item });
@@ -110,6 +119,7 @@ router.post('/', validateOrderItem, async (req, res) => {
     }
 });
 
+// Видалення елемента замовлення (тільки для адміністратора)
 router.delete('/:id', authenticateToken, checkAdmin, async (req, res) => {
     try {
         const orderItem = await OrderItem.findById(req.params.id);

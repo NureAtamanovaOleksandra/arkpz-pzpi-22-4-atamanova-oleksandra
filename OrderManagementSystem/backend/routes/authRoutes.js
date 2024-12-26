@@ -4,6 +4,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
+// Перевірка наявності всіх необхідних полів при реєстрації
 const validateRegister = (req, res, next) => {
     const { role, name, email, password } = req.body;
     if (!role) return res.status(400).json({ message: 'Role is required' });
@@ -13,6 +14,7 @@ const validateRegister = (req, res, next) => {
     next();
 };
 
+// Перевірка наявності email та паролю при вході
 const validateLogin = (req, res, next) => {
     const { email, password } = req.body;
     if (!email) return res.status(400).json({ message: 'Email is required' });
@@ -20,6 +22,7 @@ const validateLogin = (req, res, next) => {
     next();
 };
 
+// Реєстрація нового користувача з хешуванням паролю
 router.post('/register', validateRegister, async (req, res) => {
     const { role, name, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -33,6 +36,7 @@ router.post('/register', validateRegister, async (req, res) => {
     }
 });
 
+// Вхід користувача та генерація JWT токена
 router.post('/login', validateLogin, async (req, res) => {
     const { email, password } = req.body;
 

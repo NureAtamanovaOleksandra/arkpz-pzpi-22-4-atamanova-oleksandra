@@ -2,23 +2,27 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 
+// Піни для підключення RGB світлодіода
 #define RED_PIN 23
 #define GREEN_PIN 22
 #define BLUE_PIN 21
 
+// Налаштування WiFi мережі
 const char* ssid = "Wokwi-GUEST";
 const char* password = "";
 
+// URL-адреси для взаємодії з сервером
 const char* baseUrl = "http://bbdb-46-150-86-71.ngrok-free.app/api";
 const char* statusUrl = "http://bbdb-46-150-86-71.ngrok-free.app/api/iot/status";
 const char* statisticsUrl = "http://bbdb-46-150-86-71.ngrok-free.app/api/iot/statistics";
 
+// Функція встановлення кольору світлодіода
 void setColor(bool red, bool green, bool blue) {
   digitalWrite(RED_PIN, red ? LOW : HIGH);
   digitalWrite(GREEN_PIN, green ? LOW : HIGH);
   digitalWrite(BLUE_PIN, blue ? LOW : HIGH);
 }
-
+// Підключення до WiFi мережі
 void setup_wifi() {
   Serial.println("Connecting to WiFi...");
   WiFi.begin(ssid, password);
@@ -33,6 +37,7 @@ void setup_wifi() {
   Serial.println(WiFi.localIP());
 }
 
+// Розрахунок та відображення ефективності роботи системи
 void calculateEfficiency(float successRate) {
     Serial.print("Processing success rate: ");
     Serial.print(successRate);
@@ -52,6 +57,7 @@ void calculateEfficiency(float successRate) {
     }
 }
 
+// Перевірка та відображення статусу поточного замовлення
 void checkOrderStatus() {
   if (WiFi.status() == WL_CONNECTED) {
     HTTPClient http;
@@ -71,6 +77,7 @@ void checkOrderStatus() {
       Serial.print("Status response: ");
       Serial.println(response);
 
+      // Зміна кольору світлодіода відповідно до статусу
       if (response.indexOf("\"status\":\"rejected\"") >= 0) {
         setColor(true, false, false);
         Serial.println("Order Status: REJECTED (RED)");
@@ -98,6 +105,7 @@ void checkOrderStatus() {
   }
 }
 
+// Перевірка статистики та ефективності системи
 void checkStatistics() {
     if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
@@ -140,6 +148,7 @@ void checkStatistics() {
     }
 }
 
+// Ініціалізація пристрою
 void setup() {
   Serial.begin(115200);
   Serial.println("Starting setup...");
@@ -170,6 +179,7 @@ void setup() {
   setup_wifi();
 }
 
+// Головний цикл роботи
 void loop() {
     checkOrderStatus();
     delay(2500);

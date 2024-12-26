@@ -1,5 +1,6 @@
 const User = require('../models/User');
 
+// Middleware для перевірки чи має користувач права адміністратора
 const checkAdmin = async (req, res, next) => {
     try {
         const user = await User.findById(req.user.id);

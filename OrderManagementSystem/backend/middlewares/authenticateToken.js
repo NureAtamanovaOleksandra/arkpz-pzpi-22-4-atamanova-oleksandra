@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 
+// Middleware для перевірки автентифікації користувача через JWT токен
 const authenticateToken = (req, res, next) => {
     const token = req.header('Authorization')?.split(' ')[1];
 

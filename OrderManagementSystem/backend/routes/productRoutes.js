@@ -4,6 +4,7 @@ const Product = require('../models/Product');
 const authenticateToken = require('../middlewares/authenticateToken');
 const checkAdmin = require('../middlewares/checkAdmin');
 
+// Отримання всіх продуктів
 router.get('/', async (req, res) => {
     try {
         const products = await Product.find();
@@ -13,6 +14,7 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Пошук продукту за ID
 router.get('/:id', async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
@@ -25,6 +27,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// Фільтрація продуктів за різними параметрами
 router.get('/brand/:brand', async (req, res) => {
     try {
         const products = await Product.find({ brand: req.params.brand });
@@ -52,6 +55,7 @@ router.get('/type/:type', async (req, res) => {
     }
 });
 
+// Пошук продуктів за ціновим діапазоном
 router.get('/price/:min/:max', async (req, res) => {
     try {
         const products = await Product.find({
@@ -63,6 +67,7 @@ router.get('/price/:min/:max', async (req, res) => {
     }
 });
 
+// Пошук продуктів за кількістю на складі
 router.get('/quantity/:min/:max', async (req, res) => {
     try {
         const products = await Product.find({
@@ -76,6 +81,7 @@ router.get('/quantity/:min/:max', async (req, res) => {
 
 router.use(authenticateToken);
 
+// Перевірка правильності даних продукту
 const validateProduct = (req, res, next) => {
     const { name, description, brand, size, type, price, quantity, releaseDate } = req.body;
 
@@ -90,6 +96,7 @@ const validateProduct = (req, res, next) => {
     next();
 };
 
+// Створення нового продукту (тільки для адміністратора)
 router.post('/', checkAdmin, validateProduct, async (req, res) => {
     const { name, description, brand, size, type, price, quantity } = req.body;
     const product = new Product({ name, description, brand, size, type, price, quantity });
@@ -102,6 +109,7 @@ router.post('/', checkAdmin, validateProduct, async (req, res) => {
     }
 });
 
+// Видалення продукту (тільки для адміністратора)
 router.delete('/:id', authenticateToken, checkAdmin, async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
@@ -114,6 +122,7 @@ router.delete('/:id', authenticateToken, checkAdmin, async (req, res) => {
     }
 });
 
+// Оновлення інформації про продукт (тільки для адміністратора)
 router.put('/:id', authenticateToken, checkAdmin, async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);

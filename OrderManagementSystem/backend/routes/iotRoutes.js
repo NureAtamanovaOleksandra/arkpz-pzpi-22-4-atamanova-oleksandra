@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Order = require('../models/Order');
 
+// Отримання статусу останнього замовлення для відображення на світлодіоді
 router.get('/status', async (req, res) => {
     try {
         const latestOrder = await Order.findOne()
@@ -19,14 +20,17 @@ router.get('/status', async (req, res) => {
     }
 });
 
+// Розрахунок статистики ефективності обробки замовлень за останні 24 години
 router.get('/statistics', async (req, res) => {
     try {
+        // Отримання замовлень за останню добу
         const orders = await Order.find({ 
             createdAt: { 
                 $gte: new Date(Date.now() - 24*60*60*1000) 
             } 
         });
 
+        // Розрахунок середнього часу обробки та кількості виконаних замовлень
         let totalProcessingTime = 0;
         let completedOrders = 0;
 
@@ -38,6 +42,7 @@ router.get('/statistics', async (req, res) => {
             }
         });
 
+        // Обчислення середніх показників
         const averageProcessingTime = completedOrders > 0 
             ? totalProcessingTime / completedOrders 
             : 0;

@@ -7,6 +7,7 @@ const authenticateToken = require('../middlewares/authenticateToken');
 const checkAdmin = require('../middlewares/checkAdmin');
 const bcrypt = require('bcryptjs');
 
+// Функції валідації даних користувача
 const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
@@ -22,6 +23,7 @@ const validateName = (name) => {
     return re.test(name);
 };
 
+// Отримання всіх користувачів (тільки для адміністратора)
 router.get('/', authenticateToken, checkAdmin, async (req, res) => {
     try {
         const users = await User.find();
@@ -31,6 +33,7 @@ router.get('/', authenticateToken, checkAdmin, async (req, res) => {
     }
 });
 
+// Отримання користувача за ID (тільки для адміністратора)
 router.get('/:id', checkAdmin, async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -43,6 +46,7 @@ router.get('/:id', checkAdmin, async (req, res) => {
     }
 });
 
+// Видалення власного акаунту користувачем
 router.delete('/:id', async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
@@ -55,6 +59,7 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+// Видалення користувача адміністратором
 router.delete('/admin/:id', authenticateToken, checkAdmin, async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -67,12 +72,14 @@ router.delete('/admin/:id', authenticateToken, checkAdmin, async (req, res) => {
     }
 });
 
+// Оновлення профілю користувача
 router.put('/update-profile', authenticateToken, async (req, res) => {
     try {
         const { email, name, newPassword } = req.body;
         const user = await User.findOne({ email });
         if (!user) return res.status(404).json({ message: 'User not found' });
 
+        // Оновлення даних користувача
         user.name = name || user.name;
         if (newPassword) {
             const hashedPassword = await bcrypt.hash(newPassword, 10);
@@ -87,6 +94,7 @@ router.put('/update-profile', authenticateToken, async (req, res) => {
     }
 });
 
+// Оновлення даних користувача з валідацією
 router.put('/:id', async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -129,12 +137,14 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+// Відновлення паролю через email
 router.post('/forgot-password', async (req, res) => {
     try {
         const { email } = req.body;
         const user = await User.findOne({ email });
         if (!user) return res.status(404).json({ message: 'User not found' });
 
+        // Генерація нового паролю та його відправка на email
         const newPassword = crypto.randomBytes(8).toString('hex');
         const hashedPassword = await bcrypt.hash(newPassword, 10);
         user.password = hashedPassword;

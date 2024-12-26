@@ -4,6 +4,7 @@ const Payment = require('../models/Payment');
 const authenticateToken = require('../middlewares/authenticateToken');
 const checkAdmin = require('../middlewares/checkAdmin');
 
+// Отримання платежів поточного користувача
 router.get('/my-payments', authenticateToken, async (req, res) => {
     try {
         const payments = await Payment.find({ user_id: req.user.id }).populate(['order_id', 'user_id', 'product_id']);
@@ -16,6 +17,7 @@ router.get('/my-payments', authenticateToken, async (req, res) => {
     }
 });
 
+// Отримання всіх платежів (тільки для адміністратора)
 router.get('/', checkAdmin, async (req, res) => {
     try {
         const payments = await Payment.find().populate(['order_id', 'user_id', 'product_id']);
@@ -25,6 +27,7 @@ router.get('/', checkAdmin, async (req, res) => {
     }
 });
 
+// Пошук платежів за ID замовлення
 router.get('/order/:orderId', async (req, res) => {
     try {
         const payments = await Payment.find({ order_id: req.params.orderId }).populate(['order_id', 'user_id', 'product_id']);
@@ -34,6 +37,7 @@ router.get('/order/:orderId', async (req, res) => {
     }
 });
 
+// Пошук платежів за ID користувача
 router.get('/user/:userId', async (req, res) => {
     try {
         const payments = await Payment.find({ user_id: req.params.userId }).populate(['order_id', 'user_id', 'product_id']);
@@ -43,6 +47,7 @@ router.get('/user/:userId', async (req, res) => {
     }
 });
 
+// Фільтрація платежів за статусом
 router.get('/status/:status', async (req, res) => {
     try {
         const payments = await Payment.find({ status: req.params.status }).populate(['order_id', 'user_id', 'product_id']);
@@ -52,6 +57,7 @@ router.get('/status/:status', async (req, res) => {
     }
 });
 
+// Перевірка правильності даних платежу
 const validatePayment = (req, res, next) => {
     const { order_id, user_id, product_id, amount, status } = req.body;
     if (!order_id) return res.status(400).json({ message: 'Order ID is required' });
@@ -62,6 +68,7 @@ const validatePayment = (req, res, next) => {
     next();
 };
 
+// Створення нового платежу
 router.post('/', validatePayment, async (req, res) => {
     const { order_id, user_id, product_id, amount, status } = req.body;
     const payment = new Payment({ order_id, user_id, product_id, amount, status });
@@ -74,6 +81,7 @@ router.post('/', validatePayment, async (req, res) => {
     }
 });
 
+// Видалення платежу (тільки для адміністратора)
 router.delete('/:id', authenticateToken, checkAdmin, async (req, res) => {
     try {
         const payment = await Payment.findById(req.params.id);

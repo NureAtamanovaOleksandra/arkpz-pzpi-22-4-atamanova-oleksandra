@@ -4,6 +4,7 @@ const Order = require('../models/Order');
 const authenticateToken = require('../middlewares/authenticateToken');
 const checkAdmin = require('../middlewares/checkAdmin');
 
+// Отримання замовлень поточного користувача
 router.get('/my-orders', authenticateToken, async (req, res) => {
     try {
         const orders = await Order.find({ user_id: req.user.id }).populate('user_id');
@@ -16,6 +17,7 @@ router.get('/my-orders', authenticateToken, async (req, res) => {
     }
 });
 
+// Отримання всіх замовлень (тільки для адміністратора)
 router.get('/', checkAdmin, async (req, res) => {
     try {
         const orders = await Order.find().populate('user_id');
@@ -25,6 +27,7 @@ router.get('/', checkAdmin, async (req, res) => {
     }
 });
 
+// Пошук замовлення за ID
 router.get('/:id', async (req, res) => {
     try {
         const order = await Order.findById(req.params.id).populate('user_id');
@@ -37,6 +40,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// Отримання всіх замовлень конкретного користувача
 router.get('/user/:userId', async (req, res) => {
     try {
         const orders = await Order.find({ user_id: req.params.userId }).populate('user_id');
@@ -49,6 +53,7 @@ router.get('/user/:userId', async (req, res) => {
     }
 });
 
+// Фільтрація замовлень за статусом
 router.get('/status/:status', async (req, res) => {
     try {
         const orders = await Order.find({ status: req.params.status }).populate('user_id');
@@ -61,6 +66,7 @@ router.get('/status/:status', async (req, res) => {
     }
 });
 
+// Пошук замовлень за діапазоном дат
 router.get('/date/:startDate/:endDate', async (req, res) => {
     try {
         const { startDate, endDate } = req.params;
@@ -76,6 +82,7 @@ router.get('/date/:startDate/:endDate', async (req, res) => {
     }
 });
 
+// Перевірка правильності даних замовлення
 const validateOrder = (req, res, next) => {
     const { user_id, total_price, status } = req.body;
     if (!user_id) return res.status(400).json({ message: 'User ID is required' });
@@ -84,6 +91,7 @@ const validateOrder = (req, res, next) => {
     next();
 };
 
+// Створення нового замовлення
 router.post('/', validateOrder, async (req, res) => {
     const { user_id, total_price, status } = req.body;
     const order = new Order({ user_id, total_price, status });
@@ -96,6 +104,7 @@ router.post('/', validateOrder, async (req, res) => {
     }
 });
 
+// Видалення замовлення (тільки для адміністратора)
 router.delete('/:id', authenticateToken, checkAdmin, async (req, res) => {
     try {
         const order = await Order.findById(req.params.id);
